@@ -2,20 +2,18 @@ package pages;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+
 
 public class LoginPage extends BasePage {
-    private String URL = "https://aqa5master.testrail.io/";
+    private String URL = "https://aqa5master2.testrail.io/";
 
-    @FindBy(id = "name")
-    public WebElement email;
-    @FindBy(id = "password")
-    public WebElement password;
-    @FindBy(id = "button_primary")
-    public WebElement loginButton;
-    @FindBy(id = "button_primary")
-    public WebElement identifyPage;
+    private By EMAIL = By.id("name");
+    private By PASSWORD = By.id("password");
+    private By LOGINBUTTON = By.id("button_primary");
+    private By IDENTIFYPAGE = By.id("button_primary");
+
 
 
     public LoginPage(BrowsersService browsersService) {
@@ -29,11 +27,27 @@ public class LoginPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return identifyPage.isDisplayed();
+        return browsersService.getDriver().findElement(IDENTIFYPAGE).isDisplayed();
+    }
+
+    public WebElement getPasswordField() {
+        return browsersService.getDriver().findElement(PASSWORD);
+    }
+
+    public void setEmail(String email) {
+        getEmailField().sendKeys(email);
+    }
+
+    public WebElement getEmailField() {
+        return browsersService.getDriver().findElement(EMAIL);
+    }
+
+    public void setPassword(String password) {
+        getEmailField().sendKeys(password);
     }
 
     public DashboardPage loginButtonClick(){
-        loginButton.click();
+        browsersService.getDriver().findElement(LOGINBUTTON).click();
         return new DashboardPage(browsersService);
     }
 }
