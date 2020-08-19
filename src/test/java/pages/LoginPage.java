@@ -1,4 +1,4 @@
-package page;
+package pages;
 
 public class LoginPage {
 }
