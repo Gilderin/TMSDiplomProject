@@ -20,11 +20,9 @@ public abstract class BasePage {
 
     public BasePage(BrowsersService browsersService, boolean openPageByUrl) {
         this.browsersService = browsersService;
-
         if (openPageByUrl) {
             openPage();
         }
-
         waitForOpen();
     }
 
