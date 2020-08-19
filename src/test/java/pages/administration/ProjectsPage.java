@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ProjectsPage extends BasePage {
+    private By CONFIRMATIONYESCHECKBOXSELECTOR=By.cssSelector("#dialog-ident-deleteDialog input");
+    private By CONFIRMATIONOKBUTTONSELECTOR=By.cssSelector("#dialog-ident-deleteDialog .button-ok");
+    private By SUCCESSMESSAGESELECTOR=By.className("message-success");
     @FindBy(css = "#dialog-ident-deleteDialog input")
     public WebElement confirmationYesCheckbox;
     @FindBy(css = "#dialog-ident-deleteDialog .button-ok")
@@ -34,7 +37,7 @@ public class ProjectsPage extends BasePage {
     }
 
     public void confirmationYesCheckboxClick() {
-        confirmationYesCheckbox.click();
+        browsersService.getDriver().findElement(CONFIRMATIONYESCHECKBOXSELECTOR).click();
     }
 
     public void deleteIconClick(String projectName) {
@@ -45,11 +48,11 @@ public class ProjectsPage extends BasePage {
     }
 
     public void confirmationOkButtonClik() {
-        confirmationOkButton.click();
+        browsersService.getDriver().findElement(CONFIRMATIONOKBUTTONSELECTOR).click();
     }
 
     public String getMessageSuccessText() {
-        return messageSuccess.getText();
+        return browsersService.getDriver().findElement(SUCCESSMESSAGESELECTOR).getText();
     }
 
 }

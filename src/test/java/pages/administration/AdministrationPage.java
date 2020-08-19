@@ -2,14 +2,14 @@ package pages.administration;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class AdministrationPage extends BasePage {
-    @FindBy(xpath = "//div[@class = 'info-box-title']/a[. = 'Projects']")
-    public WebElement projectLink;
-    @FindBy(xpath = "//h1[. = 'Administration']")
-    public WebElement identifyPage;
+    private By PROJECTLINKSELECTOR= By.xpath("//div[@class = 'info-box-title']/a[. = 'Projects']");
+    private By IDENTIFYPAGESELECTOR=By.xpath("//h1[. = 'Administration']");
+
 
     public AdministrationPage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
@@ -21,12 +21,11 @@ public class AdministrationPage extends BasePage {
     }
 
     public boolean isPageOpened() {
-        return identifyPage.isDisplayed();
+        return browsersService.getDriver().findElement(IDENTIFYPAGESELECTOR).isDisplayed();
     }
 
     public ProjectsPage projectLinkClick(){
-        projectLink.click();
+        browsersService.getDriver().findElement(PROJECTLINKSELECTOR).click();
         return new ProjectsPage(browsersService, true);
     }
-
 }
