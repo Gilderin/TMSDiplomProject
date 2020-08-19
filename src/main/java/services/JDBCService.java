@@ -28,10 +28,8 @@ public class JDBCService extends BaseTest {
 
             statement = connection.createStatement();
             logger.info("Statement has been created");
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             logger.error(e.getMessage());
-        } catch (SQLException throwables) {
-            logger.error(throwables.getMessage());
         }
     }
 
@@ -40,7 +38,7 @@ public class JDBCService extends BaseTest {
         try {
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error(throwables.getMessage());
         }
         return resultSet;
     }
@@ -53,7 +51,7 @@ public class JDBCService extends BaseTest {
             }
             connection.close();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error(throwables.getMessage());
         }
     }
 
@@ -67,7 +65,7 @@ public class JDBCService extends BaseTest {
         try {
             statement.execute(sqlQuery);
         }catch (SQLException throwables) {
-                throwables.printStackTrace();
+            logger.error(throwables.getMessage());
             }
     }
 
@@ -78,7 +76,7 @@ public class JDBCService extends BaseTest {
         try {
             statement.execute(sqlInsert);
         }catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error(throwables.getMessage());
         }
     }
     
@@ -87,7 +85,7 @@ public class JDBCService extends BaseTest {
         try {
             statement.execute(sqlQuery);
         }catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error(throwables.getMessage());
         }
     }
 }
