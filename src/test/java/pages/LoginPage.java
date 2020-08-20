@@ -30,20 +30,13 @@ public class LoginPage extends BasePage {
         return browsersService.getDriver().findElement(IDENTIFYPAGE).isDisplayed();
     }
 
-    public WebElement getPasswordField() {
-        return browsersService.getDriver().findElement(PASSWORD);
-    }
-
     public void setEmail(String email) {
-        getEmailField().sendKeys(email);
+        browsersService.getWaiters().waitForVisibility(EMAIL).sendKeys(email);
     }
 
-    public WebElement getEmailField() {
-        return browsersService.getDriver().findElement(EMAIL);
-    }
 
     public void setPassword(String password) {
-        getEmailField().sendKeys(password);
+        browsersService.getWaiters().waitForVisibility(PASSWORD).sendKeys(password);
     }
 
     public DashboardPage loginButtonClick(){
