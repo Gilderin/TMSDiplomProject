@@ -2,12 +2,12 @@ package pages;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class DashboardPage extends BasePage {
-    @FindBy(id = "sidebar-projects-add")
-    public WebElement addProjectButton;
+    private By ADDPROJECTBUTTONSELECTOR = By.id("sidebar-projects-add");
 
     public DashboardPage(BrowsersService browsersService) {
         super(browsersService, false);
@@ -23,7 +23,7 @@ public class DashboardPage extends BasePage {
     }
 
     public AddProjectPage addProjectPageClick(){
-        addProjectButton.click();
+        browsersService.getWaiters().waitForVisibility(ADDPROJECTBUTTONSELECTOR).click();
         return new AddProjectPage(browsersService);
     }
 

@@ -3,14 +3,13 @@ package pages;
 import baseEntity.BasePage;
 import core.BrowsersService;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 
 public class LoginPage extends BasePage {
     private String URL = "https://aqa5master2.testrail.io/";
 
-    private By EMAIL = By.id("name");
-    private By PASSWORD = By.id("password");
+    private By EMAILSELECTOR = By.id("name");
+    private By PASSWORDSELECTOR = By.id("password");
     private By LOGINBUTTON = By.id("button_primary");
     private By IDENTIFYPAGE = By.id("button_primary");
 
@@ -31,12 +30,12 @@ public class LoginPage extends BasePage {
     }
 
     public void setEmail(String email) {
-        browsersService.getWaiters().waitForVisibility(EMAIL).sendKeys(email);
+        browsersService.getWaiters().waitForVisibility(EMAILSELECTOR).sendKeys(email);
     }
 
 
     public void setPassword(String password) {
-        browsersService.getWaiters().waitForVisibility(PASSWORD).sendKeys(password);
+        browsersService.getWaiters().waitForVisibility(PASSWORDSELECTOR).sendKeys(password);
     }
 
     public DashboardPage loginButtonClick(){
