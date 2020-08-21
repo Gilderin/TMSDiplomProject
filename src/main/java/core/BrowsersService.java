@@ -22,7 +22,6 @@ public class BrowsersService {
             case "chrome":
                 driverManagerType = DriverManagerType.CHROME;
                 WebDriverManager.getInstance(driverManagerType).setup();
-
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.setHeadless(readProperties.isHeadless());
                 chromeOptions.addArguments("--disable-gpu");
@@ -30,7 +29,6 @@ public class BrowsersService {
                 chromeOptions.addArguments("--ignore-certificate-errors");
                 chromeOptions.addArguments("--silent");
                 chromeOptions.addArguments("--start-maximized");
-
                 driver = new ChromeDriver(chromeOptions);
 
                 break;

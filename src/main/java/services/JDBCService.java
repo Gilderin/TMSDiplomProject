@@ -1,12 +1,17 @@
 package services;
 
 import baseEntity.BaseTest;
+import core.ReadProperties;
 
 import java.sql.*;
 
 public class JDBCService extends BaseTest {
     private static Connection connection = null;
     private static Statement statement = null;
+
+    public JDBCService() {
+        properties=new ReadProperties();
+    }
 
     public  void connectionDB(){
         logger.info("Setup JDBC connector");

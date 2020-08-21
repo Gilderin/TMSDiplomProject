@@ -27,7 +27,6 @@ public abstract class BaseTest {
 
     @AfterClass
     public void closePage() {
-        jdbcService.deleteTableProject();
         jdbcService.closeConnection();
         browsersService.getDriver().quit();
         browsersService = null;
