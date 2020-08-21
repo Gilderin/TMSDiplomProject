@@ -32,12 +32,12 @@ public class ProjectsPage extends BasePage {
     }
 
     public WebElement getProjectItemLink(String projectName) {
-        WebElement itemLink=browsersService.getDriver().findElement(By.linkText(projectName));
+        WebElement itemLink=browsersService.getWaiters().waitForVisibility(By.linkText(projectName));
         return itemLink;
     }
 
     public void confirmationYesCheckboxClick() {
-        browsersService.getDriver().findElement(CONFIRMATIONYESCHECKBOXSELECTOR).click();
+        browsersService.getWaiters().waitForVisibility(CONFIRMATIONYESCHECKBOXSELECTOR).click();
     }
 
     public void deleteIconClick(String projectName) {
@@ -48,11 +48,11 @@ public class ProjectsPage extends BasePage {
     }
 
     public void confirmationOkButtonClik() {
-        browsersService.getDriver().findElement(CONFIRMATIONOKBUTTONSELECTOR).click();
+        browsersService.getWaiters().waitForVisibility(CONFIRMATIONOKBUTTONSELECTOR).click();
     }
 
     public String getMessageSuccessText() {
-        return browsersService.getDriver().findElement(SUCCESSMESSAGESELECTOR).getText();
+        return browsersService.getWaiters().waitForVisibility(SUCCESSMESSAGESELECTOR).getText();
     }
 
 }
