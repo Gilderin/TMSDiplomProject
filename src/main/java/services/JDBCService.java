@@ -10,22 +10,13 @@ public class JDBCService extends BaseTest {
 
     public  void connectionDB(){
         logger.info("Setup JDBC connector");
-
-        String host = "localhost";
-        String port = "5432";
-        String database = "postgres";
-        String username = "postgres";
-        String password = "Andrey17";
-        String db_URL = "jdbc:postgresql://" + host + ":" + port + "/" + database;
-
+        String db_URL = properties.getDB()+"://" + properties.getDBHost() + ":" + properties.getDBPort() + "/" + properties.getDBName();
         try {
             Class.forName("org.postgresql.Driver");
             logger.info("Class has been found");
-
-            connection = DriverManager.getConnection(db_URL, username, password);
-            logger.info("Connection has been establihed");
+            connection = DriverManager.getConnection(db_URL, properties.getDBUsername(), properties.getDBPassword());
+            logger.info("Connection has been established");
             logger.info("Setup statement");
-
             statement = connection.createStatement();
             logger.info("Statement has been created");
         } catch (ClassNotFoundException | SQLException e) {
@@ -55,30 +46,6 @@ public class JDBCService extends BaseTest {
         }
     }
 
-    public void createTableProject() {
-        String sqlQuery="Create Table IF NOT EXISTS Project" +
-                " (id SERIAL primary key," +
-                " ProjectName character varying(100)," +
-                " Announcement character varying(500)," +
-                " ShowAnnouncment boolean," +
-                " ProjectType character varying(500))";
-        try {
-            statement.execute(sqlQuery);
-        }catch (SQLException throwables) {
-            logger.error(throwables.getMessage());
-            }
-    }
-
-    public void insertTestData(){
-        String sqlInsert = "INSERT INTO public.\"project\" (projectname, announcement, showannouncment, projecttype) VALUES" +
-                " ('AndreysProject1', 'lalalala', true, 'Use a single repository for all cases (recommended)')," +
-                " ('', 'opaa', false, 'Use a single repository with baseline support');";
-        try {
-            statement.execute(sqlInsert);
-        }catch (SQLException throwables) {
-            logger.error(throwables.getMessage());
-        }
-    }
     
     public void deleteTableProject(){
         String sqlQuery="Drop Table project";

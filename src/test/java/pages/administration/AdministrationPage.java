@@ -25,7 +25,7 @@ public class AdministrationPage extends BasePage {
     }
 
     public ProjectsPage projectLinkClick(){
-        browsersService.getDriver().findElement(PROJECTLINKSELECTOR).click();
+        browsersService.getWaiters().waitForVisibility(PROJECTLINKSELECTOR).click();
         return new ProjectsPage(browsersService, true);
     }
 }
