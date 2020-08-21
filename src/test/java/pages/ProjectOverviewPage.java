@@ -3,8 +3,6 @@ package pages;
 import baseEntity.BasePage;
 import core.BrowsersService;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class ProjectOverviewPage extends BasePage {
     private By IDENTIFYPAGESELECTOR=By.className("header-menu-item-selected");

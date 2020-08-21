@@ -46,13 +46,4 @@ public class JDBCService extends BaseTest {
         }
     }
 
-    
-    public void deleteTableProject(){
-        String sqlQuery="Drop Table project";
-        try {
-            statement.execute(sqlQuery);
-        }catch (SQLException throwables) {
-            logger.error(throwables.getMessage());
-        }
-    }
 }
