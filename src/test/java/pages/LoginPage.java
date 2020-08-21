@@ -2,7 +2,7 @@ package pages;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 
 
 public class LoginPage extends BasePage {
@@ -11,7 +11,7 @@ public class LoginPage extends BasePage {
     private By EMAILSELECTOR = By.id("name");
     private By PASSWORDSELECTOR = By.id("password");
     private By LOGINBUTTON = By.id("button_primary");
-    private By IDENTIFYPAGE = By.id("button_primary");
+    public By IDENTIFYPAGE = By.id("button_primary");
 
 
 
@@ -26,7 +26,7 @@ public class LoginPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return browsersService.getDriver().findElement(IDENTIFYPAGE).isDisplayed();
+        return driver.findElement(IDENTIFYPAGE).isDisplayed();
     }
 
     public void setEmail(String email) {
