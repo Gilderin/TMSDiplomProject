@@ -8,7 +8,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class DashboardPage extends BasePage {
     private By ADDPROJECTBUTTONSELECTOR = By.id("sidebar-projects-add");
-
+    private By WHATNEWSFORMSELECTOR= By.id("announcementForm");
+    private By CLOSEWHATNEWFORMBUTTON=By.cssSelector(".ui-icon.ui-icon-closethick");
     public DashboardPage(BrowsersService browsersService) {
         super(browsersService, false);
     }

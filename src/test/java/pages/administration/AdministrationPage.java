@@ -21,7 +21,7 @@ public class AdministrationPage extends BasePage {
     }
 
     public boolean isPageOpened() {
-        return browsersService.getDriver().findElement(IDENTIFYPAGESELECTOR).isDisplayed();
+        return browsersService.getDriver().findElement(By.xpath("//h1[. = 'Administration']")).isDisplayed();
     }
 
     public ProjectsPage projectLinkClick(){

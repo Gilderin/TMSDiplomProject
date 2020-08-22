@@ -25,7 +25,7 @@ public class AddProjectPage extends BasePage {
     }
 
     public boolean isPageOpened() {
-        return browsersService.getWaiters().waitForVisibility(IDENTIFYPAGESELECTOR).isDisplayed();
+        return browsersService.getWaiters().waitForVisibility(By.className("message-error")).isDisplayed();
     }
 
 }
