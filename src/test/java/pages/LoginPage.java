@@ -26,7 +26,8 @@ public class LoginPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return driver.findElement(IDENTIFYPAGE).isDisplayed();
+        WebElement login = driver.findElement(By.id("button_primary"));
+        return login.isDisplayed();
     }
 
     public void setEmail(String email) {

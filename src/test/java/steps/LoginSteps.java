@@ -16,15 +16,15 @@ public class LoginSteps extends BaseStep {
     }
 
     public void getLogin(Integer id) {
-        JDBCService jdbcService=new JDBCService();
-        SQLqueries sqLqueries=new SQLqueries();
+        JDBCService jdbcService = new JDBCService();
+        SQLqueries sqLqueries = new SQLqueries();
         LoginInfoLombok loginInfoLombok= LoginInfoLombok.builder().build();
         jdbcService.connectionDB();
         try {
             ResultSet res = jdbcService.executeQuery(sqLqueries.LoginInformationSelect(id));
             while (res.next()) {
-                loginInfoLombok.setEmail(res.getString("username"));
-                loginInfoLombok.setPassword("password");
+                loginInfoLombok.setEmail(res.getString("email"));
+                loginInfoLombok.setPassword(res.getString("password"));
             }
         }catch (SQLException throwables){
             logger.error(throwables.getMessage());
