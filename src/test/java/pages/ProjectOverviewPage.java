@@ -17,6 +17,6 @@ public class ProjectOverviewPage extends BasePage {
     }
 
     public boolean isPageOpened() {
-        return browsersService.getDriver().findElement(IDENTIFYPAGESELECTOR).getText().equalsIgnoreCase("Overview");
+        return browsersService.getDriver().findElement(By.className("header-menu-item-selected")).getText().equalsIgnoreCase("Overview");
     }
 }

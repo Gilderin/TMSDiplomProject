@@ -14,8 +14,7 @@ public class LoginSteps extends BaseStep {
     public LoginSteps(BrowsersService browsersService) {
         super(browsersService);
     }
-
-    public void getLogin(Integer id) {
+    public LoginInfoLombok getLogin(Integer id) {
         JDBCService jdbcService = new JDBCService();
         SQLqueries sqLqueries = new SQLqueries();
         LoginInfoLombok loginInfoLombok= LoginInfoLombok.builder().build();
@@ -29,13 +28,21 @@ public class LoginSteps extends BaseStep {
         }catch (SQLException throwables){
             logger.error(throwables.getMessage());
         }
+        return loginInfoLombok;
     }
 
-    public void login() {
-        LoginInfoLombok loginInfoLombok= LoginInfoLombok.builder().build();
+    public void login(LoginInfoLombok loginInfoLombok) {
         LoginPage loginPage = new LoginPage(browsersService);
         loginPage.setEmail(loginInfoLombok.getEmail());
         loginPage.setPassword(loginInfoLombok.getPassword());
         loginPage.loginButtonClick();
     }
+
+    public void login(String email,String password){
+        LoginPage loginPage = new LoginPage(browsersService);
+        loginPage.setEmail(email);
+        loginPage.setPassword(password);
+        loginPage.loginButtonClick();
+    }
+
 }
