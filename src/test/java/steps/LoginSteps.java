@@ -3,6 +3,7 @@ package steps;
 import baseEntity.BaseStep;
 import core.BrowsersService;
 import models.LoginInfoLombok;
+import pages.DashboardPage;
 import pages.LoginPage;
 import services.JDBCService;
 import utils.SQLqueries;
@@ -45,4 +46,9 @@ public class LoginSteps extends BaseStep {
         loginPage.loginButtonClick();
     }
 
+    public LoginPage logout(){
+        DashboardPage dashboardPage=new DashboardPage(browsersService);
+        dashboardPage.userNavigationButtonClick();
+        return dashboardPage.logoutButtonClick();
+    }
 }

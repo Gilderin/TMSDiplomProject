@@ -3,6 +3,7 @@ package pages;
 import baseEntity.BasePage;
 import core.BrowsersService;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -25,10 +26,12 @@ public class AddProjectPage extends BasePage {
     }
 
     public boolean isPageOpened() {
-        return browsersService.getWaiters().waitForVisibility(By.className("accept")).isDisplayed();
+        //((JavascriptExecutor) browsersService.getDriver()).executeScript("window.scrollBy(0,1000)");
+        return browsersService.getWaiters().waitForVisibility(By.id("accept")).isDisplayed();
     }
 
     public void AddProjectButtonClick () {
+        ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].scrollIntoView(true);", browsersService.getDriver().findElement(ADDPROJECTBUTTONSELECTOR));
         browsersService.getDriver().findElement(ADDPROJECTBUTTONSELECTOR).click();
     }
 
