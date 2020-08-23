@@ -26,6 +26,6 @@ public abstract class BaseApiTest {
         RestAssured.baseURI = properties.getURL();
         RestAssured.requestSpecification = given()
                 .header(HTTP.CONTENT_TYPE, ContentType.JSON)
-                .auth().preemptive().basic("balexer@mail.ru", "Ezr9AuV4OkTVegpS1iI.");
+                .auth().preemptive().basic("", "");
     }
 }

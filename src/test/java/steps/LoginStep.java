@@ -1,9 +1,11 @@
 package steps;
 
 import baseEntity.BaseStep;
+import baseEntity.BaseTest;
 import core.BrowsersService;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import models.LoginInfoLombok;
-import pages.DashboardPage;
 import pages.LoginPage;
 import services.JDBCService;
 import utils.SQLqueries;
@@ -11,11 +13,13 @@ import utils.SQLqueries;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginSteps extends BaseStep {
-    public LoginSteps(BrowsersService browsersService) {
+public class LoginStep extends BaseStep {
+    public LoginStep(BrowsersService browsersService) {
         super(browsersService);
     }
-    public LoginInfoLombok getLogin(Integer id) {
+
+    @Given("Get User Info to login from DB. User id = {int}")
+    public LoginInfoLombok getUserInfoToLoginFromDB(Integer id) {
         JDBCService jdbcService = new JDBCService();
         SQLqueries sqLqueries = new SQLqueries();
         LoginInfoLombok loginInfoLombok= LoginInfoLombok.builder().build();
@@ -32,23 +36,11 @@ public class LoginSteps extends BaseStep {
         return loginInfoLombok;
     }
 
-    public void login(LoginInfoLombok loginInfoLombok) {
+    @When("Login to Site")
+    public void loginToSite(LoginInfoLombok loginInfoLombok) {
         LoginPage loginPage = new LoginPage(browsersService);
         loginPage.setEmail(loginInfoLombok.getEmail());
         loginPage.setPassword(loginInfoLombok.getPassword());
         loginPage.loginButtonClick();
-    }
-
-    public void login(String email,String password){
-        LoginPage loginPage = new LoginPage(browsersService);
-        loginPage.setEmail(email);
-        loginPage.setPassword(password);
-        loginPage.loginButtonClick();
-    }
-
-    public LoginPage logout(){
-        DashboardPage dashboardPage=new DashboardPage(browsersService);
-        dashboardPage.userNavigationButtonClick();
-        return dashboardPage.logoutButtonClick();
     }
 }
