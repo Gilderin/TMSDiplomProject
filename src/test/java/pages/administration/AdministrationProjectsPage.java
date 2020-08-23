@@ -2,23 +2,18 @@ package pages.administration;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
+import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.AddProjectPages.ProjectPage;
 
-public class ProjectsPage extends BasePage {
+public class AdministrationProjectsPage extends BasePage {
     private By CONFIRMATIONYESCHECKBOXSELECTOR=By.cssSelector("#dialog-ident-deleteDialog input");
     private By CONFIRMATIONOKBUTTONSELECTOR=By.cssSelector("#dialog-ident-deleteDialog .button-ok");
     private By SUCCESSMESSAGESELECTOR=By.className("message-success");
-    @FindBy(css = "#dialog-ident-deleteDialog input")
-    public WebElement confirmationYesCheckbox;
-    @FindBy(css = "#dialog-ident-deleteDialog .button-ok")
-    public WebElement confirmationOkButton;
-    @FindBy(className = "message-success")
-    public WebElement messageSuccess;
-
-
-    public ProjectsPage(BrowsersService browsersService, boolean openPageByUrl) {
+    private By ADDNEWPROJECTBUTTONSELECTOR=By.cssSelector(".button-group.grid-buttons");
+    public AdministrationProjectsPage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
     }
 
@@ -32,8 +27,7 @@ public class ProjectsPage extends BasePage {
     }
 
     public WebElement getProjectItemLink(String projectName) {
-        WebElement itemLink=browsersService.getWaiters().waitForVisibility(By.linkText(projectName));
-        return itemLink;
+        return browsersService.getWaiters().waitForVisibility(By.linkText(projectName));
     }
 
     public void confirmationYesCheckboxClick() {
@@ -53,6 +47,11 @@ public class ProjectsPage extends BasePage {
 
     public String getMessageSuccessText() {
         return browsersService.getWaiters().waitForVisibility(SUCCESSMESSAGESELECTOR).getText();
+    }
+
+    public ProjectPage addProjectButtonClick(){
+        browsersService.getWaiters().waitForVisibility(ADDNEWPROJECTBUTTONSELECTOR).click();
+        return new ProjectPage(browsersService);
     }
 
 }
