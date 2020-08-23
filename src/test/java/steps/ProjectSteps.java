@@ -3,7 +3,7 @@ package steps;
 import baseEntity.BaseStep;
 import core.BrowsersService;
 import models.AddProjectLombok;
-import pages.AddProjectPage;
+import pages.AddProjectPages.AddProjectPage;
 import pages.DashboardPage;
 import services.JDBCService;
 import utils.SQLqueries;
