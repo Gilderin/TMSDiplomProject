@@ -2,6 +2,7 @@ package pages.AddProjectPages;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
+import org.openqa.selenium.By;
 
 public class ReferencesPage extends BasePage {
 
@@ -16,6 +17,6 @@ public class ReferencesPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return false;
+        return browsersService.getWaiters().waitForVisibility(By.id("accept")).isDisplayed();
     }
 }
