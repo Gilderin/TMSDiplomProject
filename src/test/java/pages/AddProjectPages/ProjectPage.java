@@ -1,13 +1,12 @@
-package pages;
+package pages.AddProjectPages;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
+import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
-public class AddProjectPage extends BasePage {
+public class ProjectPage extends BasePage {
     private By ADDPROJECTBUTTONSELECTOR = By.id("accept");
     private By NAMESELECTOR = By.id("name");
     private By SUITEMODESINGLESELECTOR = By.id("suite_mode_single");
@@ -15,8 +14,10 @@ public class AddProjectPage extends BasePage {
     private By SUITEMODEMULTISELECTOR = By.id("suite_mode_multi");
     private By IDENTIFYPAGESELECTOR = By.id("accept");
     private By MASSAGEERRORCREATIONSELECTOR = By.className("message-error");
+    private By ANNOUNCMENTSELECTOR = By.id("announcement");
+    private By SHOWANNOUNCMENTSELECTOR = By.id("show_announcement");
 
-    public AddProjectPage(BrowsersService browsersService) {
+    public ProjectPage(BrowsersService browsersService) {
         super(browsersService, false);
     }
 
@@ -25,8 +26,8 @@ public class AddProjectPage extends BasePage {
 
     }
 
+    @Override
     public boolean isPageOpened() {
-        //((JavascriptExecutor) browsersService.getDriver()).executeScript("window.scrollBy(0,1000)");
         return browsersService.getWaiters().waitForVisibility(By.id("accept")).isDisplayed();
     }
 
@@ -49,6 +50,14 @@ public class AddProjectPage extends BasePage {
 
     public void setSuiteModeMulti () {
         browsersService.getDriver().findElement(SUITEMODEMULTISELECTOR).click();
+    }
+
+    public void setProjectAnnouncement (String announcement) {
+        browsersService.getWaiters().waitForVisibility(ANNOUNCMENTSELECTOR).sendKeys(announcement);
+    }
+
+    public void clickShowAnnouncement () {
+        browsersService.getWaiters().waitForVisibility(SHOWANNOUNCMENTSELECTOR).click();
     }
 
     public String getErrorMesage () {
