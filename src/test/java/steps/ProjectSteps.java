@@ -5,6 +5,7 @@ import core.BrowsersService;
 import models.AddProjectLombok;
 import pages.addProjectPages.AddProjectPage;
 import pages.DashboardPage;
+import pages.addProjectPages.ProjectPage;
 import services.JDBCService;
 import utils.SQLqueries;
 
@@ -38,18 +39,19 @@ public class ProjectSteps extends BaseStep {
     public void createProject(AddProjectLombok addProjectLombok) {
         DashboardPage dashboardPage = new DashboardPage(browsersService);
         AddProjectPage addProjectPage = dashboardPage.addProjectPageClick();
-        addProjectPage.setProjectName(addProjectLombok.getName());
+        ProjectPage projectPage=addProjectPage.moveToProject();
+        projectPage.setProjectName(addProjectLombok.getName());
         switch (addProjectLombok.getProjectMode()) {
             case "Use a single repository for all cases (recommended)":
-                addProjectPage.setSuiteModeSingle();
+                projectPage.setSuiteModeSingle();
                 break;
             case "Use a single repository with baseline support":
-                addProjectPage.setSuiteModeSingleBaseLine();
+                projectPage.setSuiteModeSingleBaseLine();
                 break;
             case "Use multiple test suites to manage cases":
-                addProjectPage.setSuiteModeMulti();
+                projectPage.setSuiteModeMulti();
                 break;
         }
-        addProjectPage.AddProjectButtonClick();
+        projectPage.AddProjectButtonClick();
     }
 }
