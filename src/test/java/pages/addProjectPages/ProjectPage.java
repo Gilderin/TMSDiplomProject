@@ -1,8 +1,7 @@
-package pages.AddProjectPages;
+package pages.addProjectPages;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
-import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -28,7 +27,7 @@ public class ProjectPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return browsersService.getWaiters().waitForVisibility(By.id("accept")).isDisplayed();
+        return browsersService.getDriver().findElement(By.id("accept")).isDisplayed();
     }
 
     public void AddProjectButtonClick () {

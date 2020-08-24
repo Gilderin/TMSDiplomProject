@@ -2,11 +2,9 @@ package pages.administration;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
-import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import pages.AddProjectPages.ProjectPage;
+import pages.addProjectPages.ProjectPage;
 
 public class AdministrationProjectsPage extends BasePage {
     private By CONFIRMATIONYESCHECKBOXSELECTOR=By.cssSelector("#dialog-ident-deleteDialog input");

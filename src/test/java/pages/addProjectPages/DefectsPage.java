@@ -1,4 +1,4 @@
-package pages.AddProjectPages;
+package pages.addProjectPages;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
@@ -22,7 +22,7 @@ public class DefectsPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return browsersService.getWaiters().waitForVisibility(By.id("accept")).isDisplayed();
+        return browsersService.getDriver().findElement(By.id("accept")).isDisplayed();
     }
 
     public void setDefectPlugin (String value) {

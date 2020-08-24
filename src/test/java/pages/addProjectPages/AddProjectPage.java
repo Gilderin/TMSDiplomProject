@@ -1,4 +1,4 @@
-package pages.AddProjectPages;
+package pages.addProjectPages;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
@@ -26,12 +26,12 @@ public class AddProjectPage extends BasePage {
     }
 
     public boolean isPageOpened() {
-        return browsersService.getWaiters().waitForVisibility(By.id("accept")).isDisplayed();
+        return browsersService.getDriver().findElement(By.id("accept")).isDisplayed();
     }
 
     public ProjectPage moveToProject() {
         try {
-            browsersService.getWaiters().waitForVisibility(CURRENTPROJECTSELECTOR);
+            browsersService.getDriver().findElement(CURRENTPROJECTSELECTOR);
         } catch (NoSuchElementException e) {
             browsersService.getWaiters().waitForVisibility(PROJECTLINKSELECTOR).click();
         }
@@ -41,7 +41,7 @@ public class AddProjectPage extends BasePage {
 
     public AccessPage moveToAccess() {
         try {
-            browsersService.getWaiters().waitForVisibility(CURRENTACCESSELECTOR);
+            browsersService.getDriver().findElement(CURRENTACCESSELECTOR);
         } catch (NoSuchElementException e) {
             browsersService.getWaiters().waitForVisibility(ACCESSLINKSELECTOR).click();
         }
@@ -50,7 +50,7 @@ public class AddProjectPage extends BasePage {
 
     public DefectsPage moveToDefects() {
         try {
-            browsersService.getWaiters().waitForVisibility(CURRENTDEFECTSSELECTOR);
+            browsersService.getDriver().findElement(CURRENTDEFECTSSELECTOR);
         } catch (NoSuchElementException e) {
             browsersService.getWaiters().waitForVisibility(DEFECTSSELECTOR).click();
         }
@@ -59,7 +59,7 @@ public class AddProjectPage extends BasePage {
 
     public ReferencesPage moveToReferences() {
         try {
-            browsersService.getWaiters().waitForVisibility(CURRENTREFERENCESSELECTOR);
+            browsersService.getDriver().findElement(CURRENTREFERENCESSELECTOR);
         } catch (NoSuchElementException e) {
             browsersService.getWaiters().waitForVisibility(REFERENCESSELECTOR).click();
         }
