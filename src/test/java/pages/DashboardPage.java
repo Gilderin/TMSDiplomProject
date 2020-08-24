@@ -3,7 +3,7 @@ package pages;
 import baseEntity.BasePage;
 import core.BrowsersService;
 import org.openqa.selenium.By;
-import pages.AddProjectPages.AddProjectPage;
+import pages.addProjectPages.AddProjectPage;
 
 public class DashboardPage extends BasePage {
     private By ADDPROJECTBUTTONSELECTOR = By.id("sidebar-projects-add");

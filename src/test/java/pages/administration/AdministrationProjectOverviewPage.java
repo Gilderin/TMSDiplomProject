@@ -2,9 +2,8 @@ package pages.administration;
 
 import baseEntity.BasePage;
 import core.BrowsersService;
-import models.Project;
 import org.openqa.selenium.By;
-import pages.AddProjectPages.ProjectPage;
+import pages.addProjectPages.ProjectPage;
 
 public class AdministrationProjectOverviewPage extends BasePage {
     private By IDENTIFYPAGESELECTOR=By.className("header-menu-item-selected");
