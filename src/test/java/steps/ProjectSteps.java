@@ -1,10 +1,11 @@
 package steps;
 
+
 import baseEntity.BaseStep;
 import core.BrowsersService;
 import models.AddProjectLombok;
-import pages.addProjectPages.AddProjectPage;
 import pages.DashboardPage;
+import pages.addProjectPages.AddProjectPage;
 import pages.addProjectPages.ProjectPage;
 import services.JDBCService;
 import utils.SQLqueries;
