@@ -20,11 +20,11 @@ public class LoginStep extends BaseStep {
     }
 
     @Given("Get User Info to login from DB. User id = {int}")
-    public LoginInfoLombok getUserInfoToLoginFromDB(Integer id) {
-        browsersService.SetupBrowser();
+    public void getUserInfoToLoginFromDB(Integer id) {
+
         JDBCService jdbcService = new JDBCService();
         SQLqueries sqLqueries = new SQLqueries();
-        LoginInfoLombok loginInfoLombok= LoginInfoLombok.builder().build();
+        loginInfoLombok= LoginInfoLombok.builder().build();
         jdbcService.connectionDB();
         try {
             ResultSet res = jdbcService.executeQuery(sqLqueries.LoginInformationSelect(id));
@@ -35,11 +35,11 @@ public class LoginStep extends BaseStep {
         }catch (SQLException throwables){
             logger.error(throwables.getMessage());
         }
-        return loginInfoLombok;
+        //return loginInfoLombok;
     }
 
     @When("Login to Site")
-    public void loginToSite(LoginInfoLombok loginInfoLombok) {
+    public void loginToSite() {
         LoginPage loginPage = new LoginPage(browsersService);
         loginPage.setEmail(loginInfoLombok.getEmail());
         loginPage.setPassword(loginInfoLombok.getPassword());

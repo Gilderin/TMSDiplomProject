@@ -3,6 +3,8 @@ package pages;
 import baseEntity.BasePage;
 import core.BrowsersService;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class LoginPage extends BasePage {
@@ -25,7 +27,8 @@ public class LoginPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return browsersService.getWaiters().waitForVisibility(By.id("button_primary")) != null;
+        WebElement login=browsersService.getDriver().findElement(By.id("button_primary"));
+        return login.isDisplayed();
     }
 
     public void setEmail(String email) {

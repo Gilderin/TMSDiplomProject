@@ -12,6 +12,7 @@ public abstract class BaseStep {
     public BrowsersService browsersService;
     public AddProjectLombok addProjectLombok;
     public LoginInfoLombok loginInfoLombok;
+
     public BaseStep(BrowsersService browsersService) {
         this.browsersService = browsersService;
     }
