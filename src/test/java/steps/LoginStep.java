@@ -14,12 +14,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginStep extends BaseStep {
+
     public LoginStep(BrowsersService browsersService) {
         super(browsersService);
     }
 
     @Given("Get User Info to login from DB. User id = {int}")
     public LoginInfoLombok getUserInfoToLoginFromDB(Integer id) {
+        browsersService.SetupBrowser();
         JDBCService jdbcService = new JDBCService();
         SQLqueries sqLqueries = new SQLqueries();
         LoginInfoLombok loginInfoLombok= LoginInfoLombok.builder().build();

@@ -16,6 +16,8 @@ public class BrowsersService {
     private String baseUrl;
 
     public BrowsersService() {
+    }
+    public  void SetupBrowser(){
         ReadProperties readProperties = new ReadProperties();
         baseUrl = readProperties.getURL();
 
