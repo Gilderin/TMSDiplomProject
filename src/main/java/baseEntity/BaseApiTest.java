@@ -23,9 +23,6 @@ public abstract class BaseApiTest {
         jdbcService = new JDBCService();
         jdbcService.connectionDB();
         properties = new ReadProperties();
-        RestAssured.baseURI = properties.getURL();
-        RestAssured.requestSpecification = given()
-                .header(HTTP.CONTENT_TYPE, ContentType.JSON)
-                .auth().preemptive().basic("", "");
+
     }
 }
