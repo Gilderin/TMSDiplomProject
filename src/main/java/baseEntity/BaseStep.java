@@ -2,6 +2,7 @@ package baseEntity;
 
 
 import core.BrowsersService;
+import core.ReadProperties;
 import models.AddProjectLombok;
 import models.LoginInfoLombok;
 import org.testng.log4testng.Logger;
@@ -12,8 +13,10 @@ public abstract class BaseStep {
     public BrowsersService browsersService;
     public AddProjectLombok addProjectLombok;
     public LoginInfoLombok loginInfoLombok;
+    public ReadProperties properties;
 
     public BaseStep(BrowsersService browsersService) {
         this.browsersService = browsersService;
+        properties=new ReadProperties();
     }
 }
