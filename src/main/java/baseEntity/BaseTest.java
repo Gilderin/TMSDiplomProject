@@ -20,19 +20,17 @@ public abstract class BaseTest {
     public ReadProperties properties;
     public JDBCService jdbcService;
 
-    @BeforeClass
-    public void openPage() {
-        jdbcService = new JDBCService();
-        jdbcService.connectionDB();
-        browsersService = new BrowsersService();
-        properties = new ReadProperties();
-        browsersService.getDriver().get(properties.getURL());
-    }
-
-    @AfterClass
-    public void closePage() {
-        jdbcService.closeConnection();
-        browsersService.getDriver().quit();
-        browsersService = null;
-    }
+//    @BeforeClass
+//    public void openPage() {
+//        jdbcService = new JDBCService();
+//        jdbcService.connectionDB();
+//        //properties = new ReadProperties();
+//    }
+//
+//    @AfterClass
+//    public void closePage() {
+//        jdbcService.closeConnection();
+//        //browsersService.getDriver().quit();
+//        browsersService = null;
+//    }
 }

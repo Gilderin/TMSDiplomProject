@@ -1,5 +1,6 @@
 package steps;
 
+import core.ReadProperties;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import baseEntity.BaseTest;
@@ -12,9 +13,11 @@ public class Hook extends BaseTest {
 
     @Before
     public void initializeTest() {
-        this.browsersService.SetupBrowser();
-        driver = this.browsersService.getDriver();
-        driver.get(browsersService.getBaseUrl());
+        //this.browsersService=
+        //properties=new ReadProperties();
+       // this.browsersService.SetupBrowser();
+        //driver = this.browsersService.getDriver();
+        //driver.get(browsersService.getBaseUrl());
     }
 
     @After
