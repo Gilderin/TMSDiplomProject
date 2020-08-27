@@ -14,4 +14,5 @@ public class AddProjectLombok {
     private String announcement;
     private boolean showAnnouncement;
     private String projectMode;
+    private Integer projectModeId;
 }

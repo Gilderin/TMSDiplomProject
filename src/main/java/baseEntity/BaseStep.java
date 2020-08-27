@@ -11,7 +11,6 @@ import services.JDBCService;
 public abstract class BaseStep {
     public static Logger logger = Logger.getLogger(JDBCService.class);
     public BrowsersService browsersService;
-    public AddProjectLombok addProjectLombok;
 
     public ReadProperties properties;
 
