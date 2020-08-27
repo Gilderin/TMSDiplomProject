@@ -12,7 +12,7 @@ public abstract class BaseStep {
     public static Logger logger = Logger.getLogger(JDBCService.class);
     public BrowsersService browsersService;
     public AddProjectLombok addProjectLombok;
-    public LoginInfoLombok loginInfoLombok;
+
     public ReadProperties properties;
 
     public BaseStep(BrowsersService browsersService) {

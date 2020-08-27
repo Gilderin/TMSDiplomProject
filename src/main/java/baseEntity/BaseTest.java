@@ -19,4 +19,5 @@ public abstract class BaseTest {
     public BrowsersService browsersService;
     public ReadProperties properties;
     public JDBCService jdbcService;
+
 }

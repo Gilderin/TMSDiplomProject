@@ -22,8 +22,8 @@ public class LoginStepdefs extends BaseStep {
     @When("Login to Site")
     public void loginToSite() {
         LoginPage loginPage = new LoginPage(browsersService);
-        loginPage.setEmail(loginInfoLombok.getEmail());
-        loginPage.setPassword(loginInfoLombok.getPassword());
+        loginPage.setEmail(browsersService.loginInfoLombok.getEmail());
+        loginPage.setPassword(browsersService.loginInfoLombok.getPassword());
         loginPage.loginButtonClick();
     }
 
@@ -41,13 +41,13 @@ public class LoginStepdefs extends BaseStep {
     public void getUserInfoToLoginFromDBUserIdInt(Integer id) {
         JDBCService jdbcService = new JDBCService();
         SQLqueries sqLqueries = new SQLqueries();
-        loginInfoLombok= LoginInfoLombok.builder().build();
+        browsersService.loginInfoLombok= LoginInfoLombok.builder().build();
         jdbcService.connectionDB();
         try {
             ResultSet res = jdbcService.executeQuery(sqLqueries.LoginInformationSelect(id));
             while (res.next()) {
-                loginInfoLombok.setEmail(res.getString("email"));
-                loginInfoLombok.setPassword(res.getString("password"));
+                browsersService.loginInfoLombok.setEmail(res.getString("email"));
+                browsersService.loginInfoLombok.setPassword(res.getString("password"));
             }
         }catch (SQLException throwables){
             logger.error(throwables.getMessage());
