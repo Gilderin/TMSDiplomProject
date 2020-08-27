@@ -13,15 +13,12 @@ public class Hook extends BaseTest {
 
     @Before
     public void initializeTest() {
-        //this.browsersService=
         //properties=new ReadProperties();
-       // this.browsersService.SetupBrowser();
-        //driver = this.browsersService.getDriver();
-        //driver.get(browsersService.getBaseUrl());
     }
 
     @After
     public void tearDown() {
+        if(browsersService.getDriver()!=null)
         browsersService.getDriver().quit();
         browsersService = null;
     }
