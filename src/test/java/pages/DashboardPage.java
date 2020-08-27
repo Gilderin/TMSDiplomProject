@@ -32,6 +32,9 @@ public class DashboardPage extends BasePage {
     public void userNavigationButtonClick(){
         browsersService.getWaiters().waitForVisibility(USERNAVIGATIONDROPDOWNSELECTOR).click();
     }
+    public boolean userNavigationIsDisplayed(){
+        return browsersService.getWaiters().waitForVisibility(USERNAVIGATIONDROPDOWNSELECTOR).isDisplayed();
+    }
 
     public LoginPage logoutButtonClick(){
         browsersService.getWaiters().waitForVisibility(LOGOUTUSERBUTTONSELECTOR).click();
