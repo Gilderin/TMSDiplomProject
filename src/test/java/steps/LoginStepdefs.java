@@ -51,6 +51,7 @@ public class LoginStepdefs extends BaseStep {
             while (res.next()) {
                 browsersService.loginInfoLombok.setEmail(res.getString("email"));
                 browsersService.loginInfoLombok.setPassword(res.getString("password"));
+                browsersService.loginInfoLombok.setName_on_site(res.getString("name_on_site"));
             }
         }catch (SQLException throwables){
             logger.error(throwables.getMessage());
@@ -63,7 +64,21 @@ public class LoginStepdefs extends BaseStep {
         Assert.assertTrue(dashboardPage.userNavigationIsDisplayed());
     }
 
-    @And("user data shoud be from user with id = {int}")
-    public void userDataShoudBeFromUserWithId(Integer id) {
+    @And("information about the user should be coincident with the data from the database")
+    public void userDataShoudBeFromUserWithId() {
+        DashboardPage dashboardPage =new DashboardPage(browsersService);
+        Assert.assertEquals(dashboardPage.userNavigationText(),browsersService.loginInfoLombok.getName_on_site(),"User name on site not equals from DB");
+    }
+
+    @Then("error message should be displayed")
+    public void errorMessageShouldBeDisplayed() {
+        LoginPage loginPage=new LoginPage(browsersService);
+        Assert.assertTrue(loginPage.messageTitleDisplayed());
+    }
+
+    @And("error message text is {string}")
+    public void errorMessageTextIs(String messageText) {
+        LoginPage loginPage=new LoginPage(browsersService);
+        Assert.assertEquals(loginPage.errorMessageText(),messageText,"Error message is not correct");
     }
 }

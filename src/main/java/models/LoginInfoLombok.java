@@ -12,4 +12,5 @@ import lombok.Setter;
 public class LoginInfoLombok {
     private String email;
     private String password;
+    private String name_on_site;
 }
