@@ -13,7 +13,8 @@ public class LoginPage extends BasePage {
     private By EMAILSELECTOR = By.id("name");
     private By PASSWORDSELECTOR = By.id("password");
     private By LOGINBUTTON = By.id("button_primary");
-    public By IDENTIFYPAGE = By.id("button_primary");
+    private By MESSAGESELECTOR=By.className("loginpage-message-title");
+    private By MESSAGETEXTSELECTOR=By.className("error-text");
 
 
     public LoginPage(BrowsersService browsersService) {
@@ -35,13 +36,21 @@ public class LoginPage extends BasePage {
         browsersService.getWaiters().waitForVisibility(EMAILSELECTOR).sendKeys(email);
     }
 
+    public boolean messageTitleDisplayed(){
+        return browsersService.getWaiters().waitForVisibility(MESSAGESELECTOR).isDisplayed();
+    }
+    public String errorMessageText(){
+        return browsersService.getWaiters().waitForVisibility(MESSAGETEXTSELECTOR).getText();
+    }
+
 
     public void setPassword(String password) {
         browsersService.getWaiters().waitForVisibility(PASSWORDSELECTOR).sendKeys(password);
     }
 
-    public DashboardPage loginButtonClick() {
+    public void loginButtonClick() {
         browsersService.getDriver().findElement(LOGINBUTTON).click();
-        return new DashboardPage(browsersService);
+
     }
+
 }

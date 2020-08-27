@@ -36,6 +36,10 @@ public class DashboardPage extends BasePage {
         return browsersService.getWaiters().waitForVisibility(USERNAVIGATIONDROPDOWNSELECTOR).isDisplayed();
     }
 
+    public String userNavigationText(){
+        return browsersService.getWaiters().waitForVisibility(USERNAVIGATIONDROPDOWNSELECTOR).getText();
+    }
+
     public LoginPage logoutButtonClick(){
         browsersService.getWaiters().waitForVisibility(LOGOUTUSERBUTTONSELECTOR).click();
         return new LoginPage(browsersService);
