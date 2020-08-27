@@ -2,6 +2,7 @@ package steps;
 
 import baseEntity.BaseStep;
 import core.BrowsersService;
+import io.cucumber.java.bm.Bagi;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,23 +19,6 @@ public class LoginStepdefs extends BaseStep {
         super(browsersService);
     }
 
-    //@Given("Get User Info to login from DB. User id = {int}")
-    public void getUserInfoToLoginFromDB(Integer id) {
-        JDBCService jdbcService = new JDBCService();
-        SQLqueries sqLqueries = new SQLqueries();
-        loginInfoLombok= LoginInfoLombok.builder().build();
-        jdbcService.connectionDB();
-        try {
-            ResultSet res = jdbcService.executeQuery(sqLqueries.LoginInformationSelect(id));
-            while (res.next()) {
-                loginInfoLombok.setEmail(res.getString("email"));
-                loginInfoLombok.setPassword(res.getString("password"));
-            }
-        }catch (SQLException throwables){
-            logger.error(throwables.getMessage());
-        }
-    }
-
     @When("Login to Site")
     public void loginToSite() {
         LoginPage loginPage = new LoginPage(browsersService);
@@ -43,7 +27,7 @@ public class LoginStepdefs extends BaseStep {
         loginPage.loginButtonClick();
     }
 
-    @Given("Browser is open")
+    @When("Browser is open")
     public void browserIsOpen() {
         browsersService.SetupBrowser();
     }
