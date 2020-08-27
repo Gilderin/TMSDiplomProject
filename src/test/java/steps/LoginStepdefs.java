@@ -40,23 +40,6 @@ public class LoginStepdefs extends BaseStep {
         browsersService.getDriver().get(properties.getURL());
     }
 
-    @Then("Get User Info to login from DB. User id = {int}")
-    public void getUserInfoToLoginFromDBUserIdInt(Integer id) {
-        JDBCService jdbcService = new JDBCService();
-        SQLqueries sqLqueries = new SQLqueries();
-        browsersService.loginInfoLombok= LoginInfoLombok.builder().build();
-        jdbcService.connectionDB();
-        try {
-            ResultSet res = jdbcService.executeQuery(sqLqueries.LoginInformationSelect(id));
-            while (res.next()) {
-                browsersService.loginInfoLombok.setEmail(res.getString("email"));
-                browsersService.loginInfoLombok.setPassword(res.getString("password"));
-            }
-        }catch (SQLException throwables){
-            logger.error(throwables.getMessage());
-        }
-    }
-
     @Given("login info from db where user id = {int}")
     public void loginInfoFromDbWhereUserId(Integer id) {
         JDBCService jdbcService = new JDBCService();
