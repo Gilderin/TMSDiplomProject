@@ -19,13 +19,13 @@ public class LoginSteps extends BaseStep {
     public void getLogin(Integer id) {
         JDBCService jdbcService = new JDBCService();
         SQLqueries sqLqueries = new SQLqueries();
-        loginInfoLombok= LoginInfoLombok.builder().build();
+        //loginInfoLombok= LoginInfoLombok.builder().build();
         jdbcService.connectionDB();
         try {
             ResultSet res = jdbcService.executeQuery(sqLqueries.LoginInformationSelect(id));
             while (res.next()) {
-                loginInfoLombok.setEmail(res.getString("email"));
-                loginInfoLombok.setPassword(res.getString("password"));
+              //  loginInfoLombok.setEmail(res.getString("email"));
+               // loginInfoLombok.setPassword(res.getString("password"));
             }
         }catch (SQLException throwables){
             logger.error(throwables.getMessage());
