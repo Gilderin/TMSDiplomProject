@@ -1,25 +1,24 @@
 package steps;
 
 
-import baseEntity.BaseStep;
+import baseEntity.BaseUtil;
 import core.BrowsersService;
 import models.AddProjectLombok;
 import pages.DashboardPage;
 import pages.addProjectPages.AddProjectPage;
 import pages.addProjectPages.ProjectPage;
-import services.JDBCService;
 import utils.SQLqueries;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProjectSteps extends BaseStep {
+public class ProjectSteps extends BaseUtil {
     public ProjectSteps(BrowsersService browsersService) {
         super(browsersService);
     }
 
     public AddProjectLombok getProjectInfo(Integer id) {
-        JDBCService jdbcService = new JDBCService();
+        //JDBCService jdbcService = new JDBCService();
         SQLqueries sqLqueries = new SQLqueries();
         AddProjectLombok addProjectLombok = AddProjectLombok.builder().build();
         jdbcService.connectionDB();
@@ -39,8 +38,8 @@ public class ProjectSteps extends BaseStep {
 
     public void createProject(AddProjectLombok addProjectLombok) {
         DashboardPage dashboardPage = new DashboardPage(browsersService);
-        AddProjectPage addProjectPage = dashboardPage.addProjectPageClick();
-        ProjectPage projectPage=addProjectPage.moveToProject();
+        AddProjectPage addProjectPage = dashboardPage.addProjectButtonClick();
+        ProjectPage projectPage = addProjectPage.moveToProject();
         projectPage.setProjectName(addProjectLombok.getName());
         switch (addProjectLombok.getProjectMode()) {
             case "Use a single repository for all cases (recommended)":
@@ -53,6 +52,6 @@ public class ProjectSteps extends BaseStep {
                 projectPage.setSuiteModeMulti();
                 break;
         }
-        projectPage.AddProjectButtonClick();
+        projectPage.addProjectButtonClick();
     }
 }

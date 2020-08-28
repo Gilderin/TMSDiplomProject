@@ -1,8 +1,8 @@
 Feature: Login to the Site
 
   Background:
-    Given  Browser is open
-    And  Open login page
+    Given  browser is open
+    And  open login page
 
   Scenario: Success login to TestRail
     Given login info from db where user id = 1
@@ -15,3 +15,9 @@ Feature: Login to the Site
     When login to website
     Then error message should be displayed
     And error message text is "Email/Login or Password is incorrect. Please try again."
+
+    Scenario: Logout
+      Given login info from db where user id = 1
+      When login to website
+      Then dashboard page is opened
+      Then logout from site

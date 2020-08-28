@@ -30,7 +30,7 @@ public class ProjectPage extends BasePage {
         return browsersService.getDriver().findElement(By.id("accept")).isDisplayed();
     }
 
-    public void AddProjectButtonClick () {
+    public void addProjectButtonClick() {
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].scrollIntoView(true);", browsersService.getDriver().findElement(ADDPROJECTBUTTONSELECTOR));
         browsersService.getDriver().findElement(ADDPROJECTBUTTONSELECTOR).click();
     }

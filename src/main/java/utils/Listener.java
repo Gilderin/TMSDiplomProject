@@ -1,6 +1,6 @@
 package utils;
 
-import baseEntity.BaseTest;
+import baseEntity.BaseUtil;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -21,7 +21,7 @@ public class Listener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult tr) {
         Object currentClass = tr.getInstance();
-        WebDriver driver = ((BaseTest) currentClass).browsersService.getDriver();
+        WebDriver driver = ((BaseUtil) currentClass).browsersService.getDriver();
         byte[] srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         saveScreenshot(srcFile);
     }

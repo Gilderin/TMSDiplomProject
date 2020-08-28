@@ -1,27 +1,27 @@
 package steps;
 
+import baseEntity.BaseUtil;
+import core.BrowsersService;
+import core.ReadProperties;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import baseEntity.BaseTest;
-import core.BrowsersService;
+import services.JDBCService;
 
-public class Hook extends BaseTest {
-
+public class Hook extends BaseUtil {
 
     public Hook(BrowsersService browsersService) {
-        this.browsersService = browsersService;
+        super(browsersService);
     }
 
     @Before
     public void initializeTest() {
 
-        //properties=new ReadProperties();
     }
 
     @After
     public void tearDown() {
-        if(browsersService.getDriver()!=null)
-        browsersService.getDriver().quit();
+        if (browsersService.getDriver() != null)
+            browsersService.getDriver().quit();
         browsersService = null;
     }
 }

@@ -12,8 +12,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import utils.Waiters;
 
 public class BrowsersService {
-    public LoginInfoLombok loginInfoLombok;
-    public AddProjectLombok addProjectLombok;
+
     private WebDriver driver = null;
     private DriverManagerType driverManagerType = null;
     private Waiters waiters;
