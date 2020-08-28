@@ -50,7 +50,8 @@ public class LoginPage extends BasePage {
 
     public void loginButtonClick() {
         browsersService.getDriver().findElement(LOGINBUTTON).click();
-
     }
+
+
 
 }

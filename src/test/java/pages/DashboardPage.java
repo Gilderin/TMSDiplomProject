@@ -24,16 +24,13 @@ public class DashboardPage extends BasePage {
         return browsersService.getDriver().getTitle().equalsIgnoreCase("All Projects - TestRail");
     }
 
-    public AddProjectPage addProjectPageClick(){
+    public AddProjectPage addProjectButtonClick(){
         browsersService.getWaiters().waitForVisibility(ADDPROJECTBUTTONSELECTOR).click();
         return new AddProjectPage(browsersService);
     }
 
     public void userNavigationButtonClick(){
         browsersService.getWaiters().waitForVisibility(USERNAVIGATIONDROPDOWNSELECTOR).click();
-    }
-    public boolean userNavigationIsDisplayed(){
-        return browsersService.getWaiters().waitForVisibility(USERNAVIGATIONDROPDOWNSELECTOR).isDisplayed();
     }
 
     public String userNavigationText(){
