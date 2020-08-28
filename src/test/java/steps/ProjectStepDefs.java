@@ -32,7 +32,7 @@ public class ProjectStepDefs extends BaseUtil {
                 addProjectLombok.setAnnouncement(res.getString("announcement"));
                 addProjectLombok.setShowAnnouncement(res.getBoolean("show_announcement"));
                 addProjectLombok.setProjectModeId(res.getInt("projectType"));
-                addProjectLombok.setProjectMode(res.getString("projectMode"));
+                addProjectLombok.setProjectMode(res.getString("type"));
             }
         } catch (SQLException throwables) {
             logger.error(throwables.getMessage());
