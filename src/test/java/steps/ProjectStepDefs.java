@@ -2,14 +2,18 @@ package steps;
 
 import baseEntity.BaseUtil;
 import core.BrowsersService;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.AddProjectLombok;
 import org.apache.http.HttpStatus;
+import org.testng.Assert;
 import pages.DashboardPage;
 import pages.addProjectPages.AddProjectPage;
 import pages.addProjectPages.ProjectPage;
+import pages.administration.AdministrationPage;
+import pages.administration.AdministrationProjectsPage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -87,6 +91,23 @@ public class ProjectStepDefs extends BaseUtil {
                 projectPage.setSuiteModeMulti();
                 break;
         }
+    }
+
+    @And("adnimistration project page opened")
+    public void adnimistrationProjectPageOpened() {
+        DashboardPage dashboardPage=new DashboardPage(browsersService);
+        AdministrationPage administrationPage=dashboardPage.administrationButtonClick();
+        AdministrationProjectsPage administrationProjectsPage=administrationPage.projectLinkClick();
+        Assert.assertTrue(administrationProjectsPage.isPageOpened());
+    }
+
+    @When("delete project with name from db")
+    public void deleteProjectWithNameFromDb() {
+        AdministrationProjectsPage administrationProjectsPage =new AdministrationProjectsPage(browsersService,false);
+        administrationProjectsPage.deleteIconClick(addProjectLombok.getName());
+        administrationProjectsPage.confirmationYesCheckboxClick();
+        administrationProjectsPage.confirmationOkButtonClik();
+        Assert.assertFalse(administrationProjectsPage.projectLinkIsVisible(addProjectLombok.getName()),"Project not deleted");
     }
 }
 
