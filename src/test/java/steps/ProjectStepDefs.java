@@ -46,7 +46,6 @@ public class ProjectStepDefs extends BaseUtil {
     @When("create project")
     public void createProject() {
         String endpoint = "/index.php?/api/v2/add_project";
-
         given()
                 .body(String.format("{\n" +
                         "    \"name\": \"%s\",\n" +
