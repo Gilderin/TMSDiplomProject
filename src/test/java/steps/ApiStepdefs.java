@@ -20,6 +20,6 @@ public class ApiStepdefs extends BaseUtil {
         RestAssured.baseURI = properties.getURL();
         RestAssured.requestSpecification = given()
                 .header(HTTP.CONTENT_TYPE, ContentType.JSON)
-                .auth().preemptive().basic(loginInfoLombok.getEmail(), loginInfoLombok.getPassword());
+                .auth().preemptive().basic(browsersService.loginInfoLombok.getEmail(), browsersService.loginInfoLombok.getPassword());
     }
 }

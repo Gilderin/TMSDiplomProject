@@ -16,7 +16,7 @@ public class Hook extends BaseUtil {
 
     @Before
     public void initializeTest() {
-        loginInfoLombok=null;
+
     }
 
     @After

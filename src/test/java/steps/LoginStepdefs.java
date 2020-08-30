@@ -24,8 +24,8 @@ public class LoginStepdefs extends BaseUtil {
     @When("login to website")
     public void loginToSite() {
         LoginPage loginPage = new LoginPage(browsersService);
-        loginPage.setEmail(loginInfoLombok.getEmail());
-        loginPage.setPassword(loginInfoLombok.getPassword());
+        loginPage.setEmail(browsersService.loginInfoLombok.getEmail());
+        loginPage.setPassword(browsersService.loginInfoLombok.getPassword());
         loginPage.loginButtonClick();
     }
 
@@ -41,14 +41,14 @@ public class LoginStepdefs extends BaseUtil {
 
     @Given("login info from db where user id = {int}")
     public void loginInfoFromDbWhereUserId(Integer id) {
-        loginInfoLombok = LoginInfoLombok.builder().build();
+        browsersService.loginInfoLombok = LoginInfoLombok.builder().build();
         jdbcService.connectionDB();
         try {
             ResultSet res = jdbcService.executeQuery(sqLqueries.LoginInformationSelect(id));
             while (res.next()) {
-                loginInfoLombok.setEmail(res.getString("email"));
-                loginInfoLombok.setPassword(res.getString("password"));
-                loginInfoLombok.setName_on_site(res.getString("name_on_site"));
+                browsersService.loginInfoLombok.setEmail(res.getString("email"));
+                browsersService.loginInfoLombok.setPassword(res.getString("password"));
+                browsersService.loginInfoLombok.setName_on_site(res.getString("name_on_site"));
             }
         } catch (SQLException throwables) {
             logger.error(throwables.getMessage());
@@ -64,7 +64,7 @@ public class LoginStepdefs extends BaseUtil {
     @And("information about the user should be coincident with the data from the database")
     public void userDataShoudBeFromUserWithId() {
         DashboardPage dashboardPage = new DashboardPage(browsersService);
-        Assert.assertEquals(dashboardPage.userNavigationText(), loginInfoLombok.getName_on_site(), "User name on site not equals from DB");
+        Assert.assertEquals(dashboardPage.userNavigationText(), browsersService.loginInfoLombok.getName_on_site(), "User name on site not equals from DB");
     }
 
     @Then("error message should be displayed")
