@@ -14,8 +14,7 @@ public abstract class BaseUtil {
     public static Logger logger = Logger.getLogger(JDBCService.class);
     public BrowsersService browsersService;
     public ReadProperties properties;
-    public LoginInfoLombok loginInfoLombok;
-    public AddProjectLombok addProjectLombok;
+
     public JDBCService jdbcService;
     public SQLqueries sqLqueries;
 

@@ -2,14 +2,18 @@ package steps;
 
 import baseEntity.BaseUtil;
 import core.BrowsersService;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.AddProjectLombok;
 import org.apache.http.HttpStatus;
+import org.testng.Assert;
 import pages.DashboardPage;
 import pages.addProjectPages.AddProjectPage;
 import pages.addProjectPages.ProjectPage;
+import pages.administration.AdministrationPage;
+import pages.administration.AdministrationProjectsPage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,16 +27,16 @@ public class ProjectStepDefs extends BaseUtil {
 
     @Given("project info from db where project id = {int}")
     public void getProjectInfoFromDB(Integer id) {
-        addProjectLombok = AddProjectLombok.builder().build();
+        browsersService.addProjectLombok = AddProjectLombok.builder().build();
         jdbcService.connectionDB();
         try {
             ResultSet res = jdbcService.executeQuery(sqLqueries.ProjectInformationSelect(id));
             while (res.next()) {
-                addProjectLombok.setName(res.getString("name"));
-                addProjectLombok.setAnnouncement(res.getString("announcement"));
-                addProjectLombok.setShowAnnouncement(res.getBoolean("show_announcement"));
-                addProjectLombok.setProjectModeId(res.getInt("projectType"));
-                addProjectLombok.setProjectMode(res.getString("type"));
+                browsersService.addProjectLombok.setName(res.getString("name"));
+                browsersService.addProjectLombok.setAnnouncement(res.getString("announcement"));
+                browsersService.addProjectLombok.setShowAnnouncement(res.getBoolean("show_announcement"));
+                browsersService.addProjectLombok.setProjectModeId(res.getInt("projectType"));
+                browsersService.addProjectLombok.setProjectMode(res.getString("type"));
             }
         } catch (SQLException throwables) {
             logger.error(throwables.getMessage());
@@ -47,7 +51,7 @@ public class ProjectStepDefs extends BaseUtil {
                 .body(String.format("{\n" +
                         "    \"name\": \"%s\",\n" +
                         "    \"suite_mode\": %d\n" +
-                        "}", addProjectLombok.getName(), addProjectLombok.getProjectModeId()))
+                        "}", browsersService.addProjectLombok.getName(), browsersService.addProjectLombok.getProjectModeId()))
                 .when()
                 .post(endpoint)
                 .then()
@@ -65,9 +69,9 @@ public class ProjectStepDefs extends BaseUtil {
     public void createProjectOnUI() {
         AddProjectPage addProjectPage = new AddProjectPage(browsersService);
         ProjectPage projectPage = addProjectPage.moveToProject();
-        projectPage.setProjectName(addProjectLombok.getName());
-        projectPage.setProjectAnnouncement(addProjectLombok.getAnnouncement());
-        if (addProjectLombok.isShowAnnouncement()) {
+        projectPage.setProjectName(browsersService.addProjectLombok.getName());
+        projectPage.setProjectAnnouncement(browsersService.addProjectLombok.getAnnouncement());
+        if (browsersService.addProjectLombok.isShowAnnouncement()) {
             projectPage.clickShowAnnouncement();
         }
         setProjectMode();
@@ -76,7 +80,7 @@ public class ProjectStepDefs extends BaseUtil {
 
     public void setProjectMode() {
         ProjectPage projectPage = new ProjectPage(browsersService);
-        switch (addProjectLombok.getProjectMode()) {
+        switch (browsersService.addProjectLombok.getProjectMode()) {
             case "Use a single repository for all cases (recommended)":
                 projectPage.setSuiteModeSingle();
                 break;
@@ -87,6 +91,23 @@ public class ProjectStepDefs extends BaseUtil {
                 projectPage.setSuiteModeMulti();
                 break;
         }
+    }
+
+    @And("adnimistration project page opened")
+    public void adnimistrationProjectPageOpened() {
+        DashboardPage dashboardPage=new DashboardPage(browsersService);
+        AdministrationPage administrationPage=dashboardPage.administrationButtonClick();
+        AdministrationProjectsPage administrationProjectsPage=administrationPage.projectLinkClick();
+        Assert.assertTrue(administrationProjectsPage.isPageOpened());
+    }
+
+    @When("delete project with name from db")
+    public void deleteProjectWithNameFromDb() {
+        AdministrationProjectsPage administrationProjectsPage =new AdministrationProjectsPage(browsersService,false);
+        administrationProjectsPage.deleteIconClick(browsersService.addProjectLombok.getName());
+        administrationProjectsPage.confirmationYesCheckboxClick();
+        administrationProjectsPage.confirmationOkButtonClik();
+        Assert.assertFalse(administrationProjectsPage.projectLinkIsVisible(browsersService.addProjectLombok.getName()),"Project not deleted");
     }
 }
 

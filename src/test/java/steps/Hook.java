@@ -5,6 +5,7 @@ import core.BrowsersService;
 import core.ReadProperties;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import models.LoginInfoLombok;
 import services.JDBCService;
 
 public class Hook extends BaseUtil {
