@@ -3,7 +3,7 @@ package core;
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import models.AddProjectLombok;
-import models.LoginInfoLombok;
+import models.UserInformation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,7 +12,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import utils.Waiters;
 
 public class BrowsersService {
-    public LoginInfoLombok loginInfoLombok;
+    public UserInformation userInformation;
     public AddProjectLombok addProjectLombok;
     private WebDriver driver = null;
     private DriverManagerType driverManagerType = null;

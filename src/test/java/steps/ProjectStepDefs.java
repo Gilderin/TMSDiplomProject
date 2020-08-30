@@ -43,20 +43,6 @@ public class ProjectStepDefs extends BaseUtil {
         }
     }
 
-    @When("create project")
-    public void createProject() {
-        String endpoint = "/index.php?/api/v2/add_project";
-        given()
-                .body(String.format("{\n" +
-                        "    \"name\": \"%s\",\n" +
-                        "    \"suite_mode\": %d\n" +
-                        "}", browsersService.addProjectLombok.getName(), browsersService.addProjectLombok.getProjectModeId()))
-                .when()
-                .post(endpoint)
-                .then()
-                .log().body()
-                .statusCode(HttpStatus.SC_OK);
-    }
 
     @When("add project button click")
     public void addProjectButtonClick() {
