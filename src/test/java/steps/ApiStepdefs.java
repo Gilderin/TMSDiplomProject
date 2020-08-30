@@ -87,7 +87,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    public void getAllUsers1() {
+    public void getAllUsers() {
         String endpoint = "/index.php?/api/v2/get_users";
 
         given()
@@ -95,6 +95,23 @@ public class ApiStepdefs extends BaseUtil {
                 .get(endpoint)
                 .then().log().body()
                 .statusCode(HttpStatus.SC_OK);
+    }
+
+    public void getAllCases() {
+        String endpoint = "index.php?/api/v2/get_cases/{project_id}";
+
+
+        given()
+                .when()
+                .pathParam("project_id", projectID)
+                .get(endpoint)
+                .then().log().body()
+                .statusCode(HttpStatus.SC_OK);
+    }
+
+    public void addTestCase() {
+
+
     }
 
 
