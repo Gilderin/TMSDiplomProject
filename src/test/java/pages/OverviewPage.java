@@ -3,6 +3,7 @@ package pages;
 import baseEntity.BasePage;
 import core.BrowsersService;
 import org.openqa.selenium.By;
+import pages.testcasePages.AddTestCasePage;
 
 public class OverviewPage extends BasePage {
 
@@ -49,8 +50,9 @@ public class OverviewPage extends BasePage {
         browsersService.getWaiters().waitForVisibility(VIEWALLTESTRUNSSELECTOR).click();
     }
 
-    public void addTestCaseButtonClick() {
+    public AddTestCasePage addTestCaseButtonClick() {
         browsersService.getWaiters().waitForVisibility(ADDTESTCASESSELECTOR).click();
+        return new AddTestCasePage(browsersService,false);
     }
 
     public void viewAllTestCasesButtonClick() {
