@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ProjectLombok {
+public class ProjectInfo {
     private String name;
     private String job;
     private String email;

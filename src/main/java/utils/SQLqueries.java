@@ -20,8 +20,8 @@ public class SQLqueries {
     }
 
     public String TestCasesInformationSelect(Integer id) {
-        TestCasesInformation = "Select * from public.\"TestCases\"\n" +
-                "where \"TestCases\".\"id\"='"+id+"'";
+        TestCasesInformation = "Select title, template, priority, estimate, type from public.\"TestCases\"" +
+                " where id = '"+id+"'";
         return TestCasesInformation;
     }
 

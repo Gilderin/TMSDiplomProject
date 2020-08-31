@@ -6,8 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import models.AddProjectLombok;
-import org.apache.http.HttpStatus;
+import models.AddProjectInfo;
 import org.testng.Assert;
 import pages.DashboardPage;
 import pages.addProjectPages.AddProjectPage;
@@ -27,16 +26,16 @@ public class ProjectStepDefs extends BaseUtil {
 
     @Given("project info from db where project id = {int}")
     public void getProjectInfoFromDB(Integer id) {
-        browsersService.addProjectLombok = AddProjectLombok.builder().build();
+        browsersService.addProjectInfo = AddProjectInfo.builder().build();
         jdbcService.connectionDB();
         try {
             ResultSet res = jdbcService.executeQuery(sqLqueries.ProjectInformationSelect(id));
             while (res.next()) {
-                browsersService.addProjectLombok.setName(res.getString("name"));
-                browsersService.addProjectLombok.setAnnouncement(res.getString("announcement"));
-                browsersService.addProjectLombok.setShowAnnouncement(res.getBoolean("show_announcement"));
-                browsersService.addProjectLombok.setProjectModeId(res.getInt("projectType"));
-                browsersService.addProjectLombok.setProjectMode(res.getString("type"));
+                browsersService.addProjectInfo.setName(res.getString("name"));
+                browsersService.addProjectInfo.setAnnouncement(res.getString("announcement"));
+                browsersService.addProjectInfo.setShowAnnouncement(res.getBoolean("show_announcement"));
+                browsersService.addProjectInfo.setProjectModeId(res.getInt("projectType"));
+                browsersService.addProjectInfo.setProjectMode(res.getString("type"));
             }
         } catch (SQLException throwables) {
             logger.error(throwables.getMessage());
@@ -54,9 +53,9 @@ public class ProjectStepDefs extends BaseUtil {
     public void createProjectOnUI() {
         AddProjectPage addProjectPage = new AddProjectPage(browsersService);
         ProjectPage projectPage = addProjectPage.moveToProject();
-        projectPage.setProjectName(browsersService.addProjectLombok.getName());
-        projectPage.setProjectAnnouncement(browsersService.addProjectLombok.getAnnouncement());
-        if (browsersService.addProjectLombok.isShowAnnouncement()) {
+        projectPage.setProjectName(browsersService.addProjectInfo.getName());
+        projectPage.setProjectAnnouncement(browsersService.addProjectInfo.getAnnouncement());
+        if (browsersService.addProjectInfo.isShowAnnouncement()) {
             projectPage.clickShowAnnouncement();
         }
         setProjectMode();
@@ -65,7 +64,7 @@ public class ProjectStepDefs extends BaseUtil {
 
     public void setProjectMode() {
         ProjectPage projectPage = new ProjectPage(browsersService);
-        switch (browsersService.addProjectLombok.getProjectMode()) {
+        switch (browsersService.addProjectInfo.getProjectMode()) {
             case "Use a single repository for all cases (recommended)":
                 projectPage.setSuiteModeSingle();
                 break;
@@ -89,10 +88,10 @@ public class ProjectStepDefs extends BaseUtil {
     @When("delete project with name from db")
     public void deleteProjectWithNameFromDb() {
         AdministrationProjectsPage administrationProjectsPage =new AdministrationProjectsPage(browsersService,false);
-        administrationProjectsPage.deleteIconClick(browsersService.addProjectLombok.getName());
+        administrationProjectsPage.deleteIconClick(browsersService.addProjectInfo.getName());
         administrationProjectsPage.confirmationYesCheckboxClick();
         administrationProjectsPage.confirmationOkButtonClik();
-        Assert.assertFalse(administrationProjectsPage.projectLinkIsVisible(browsersService.addProjectLombok.getName()),"Project not deleted");
+        Assert.assertFalse(administrationProjectsPage.projectLinkIsVisible(browsersService.addProjectInfo.getName()),"Project not deleted");
     }
 }
 

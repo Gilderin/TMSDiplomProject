@@ -3,11 +3,12 @@ package steps;
 
 import baseEntity.BaseUtil;
 import core.BrowsersService;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
-import models.AddProjectLombok;
+import models.AddProjectInfo;
 import org.apache.http.HttpStatus;
 import org.apache.http.protocol.HTTP;
 
@@ -19,6 +20,9 @@ public class ApiStepdefs extends BaseUtil {
     }
 
     int projectID;
+    int sectionID;
+    int caseID;
+    String name = "fdfd";
 
     @When("use this information to login")
     public void setupAPI() {
@@ -36,7 +40,7 @@ public class ApiStepdefs extends BaseUtil {
                 .body(String.format("{\n" +
                         "    \"name\": \"%s\",\n" +
                         "    \"suite_mode\": %d\n" +
-                        "}", browsersService.addProjectLombok.getName(), browsersService.addProjectLombok.getProjectModeId()))
+                        "}", browsersService.addProjectInfo.getName(), browsersService.addProjectInfo.getProjectModeId()))
                 .when()
                 .post(endpoint)
                 .then()
@@ -60,11 +64,11 @@ public class ApiStepdefs extends BaseUtil {
     public void updateProject() {
         String endpoint = "index.php?/api/v2/update_project/{project_id}";
 
-        AddProjectLombok project =  AddProjectLombok.builder().build();
-                project.setName("PR04_UPD");
-                project.setAnnouncement("Test!!!");
-                project.setShowAnnouncement(true);
-                project.setCompleted(true);
+        AddProjectInfo project = AddProjectInfo.builder().build();
+        project.setName("PR04_UPD");
+        project.setAnnouncement("Test!!!");
+        project.setShowAnnouncement(true);
+        project.setCompleted(true);
 
         given()
                 .pathParam("project_id", projectID)
@@ -97,6 +101,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
+    @And("get all testCases")
     public void getAllCases() {
         String endpoint = "index.php?/api/v2/get_cases/{project_id}";
 
@@ -109,8 +114,44 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    public void addTestCase() {
+    @And("create testCase")
+    public void createTestCase() {
+        String endpoint = "index.php?/api/v2/add_case/{section_id}";
 
+        caseID = given()
+                .pathParam("section_id", sectionID)
+                .body(String.format("{\n" +
+                                "    \"title\": \"%s\",\n" +
+                                "    \"template_id\": %d,\n" +
+                                "    \"type_id\": %d,\n" +
+                                "    \"estimate\": \"%s\",\n" +
+                                "    \"priority_id\": %d\n" +
+
+                                "}", browsersService.testCasesInfo.getTitle(), browsersService.testCasesInfo.getTemplateId(),
+                        browsersService.testCasesInfo.getTypeId(), browsersService.testCasesInfo.getEstimate(), browsersService.testCasesInfo.getPriorityId()))
+                .when()
+                .post(endpoint)
+                .then()
+                .log().body()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().get("id");
+    }
+
+    @And("create new section")
+    public void createSection() {
+        String endpoint = "index.php?/api/v2/add_section/{project_id}";
+
+        sectionID = given()
+                .pathParam("project_id", projectID)
+                .body(String.format("{\n" +
+                        "    \"name\": \"%s\"\n" +
+                        "}", name))
+                .when()
+                .post(endpoint)
+                .then()
+                .log().body()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().get("id");
 
     }
 

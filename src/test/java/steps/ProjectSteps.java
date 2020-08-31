@@ -3,7 +3,7 @@ package steps;
 
 import baseEntity.BaseUtil;
 import core.BrowsersService;
-import models.AddProjectLombok;
+import models.AddProjectInfo;
 import pages.DashboardPage;
 import pages.addProjectPages.AddProjectPage;
 import pages.addProjectPages.ProjectPage;
@@ -17,31 +17,31 @@ public class ProjectSteps extends BaseUtil {
         super(browsersService);
     }
 
-    public AddProjectLombok getProjectInfo(Integer id) {
+    public AddProjectInfo getProjectInfo(Integer id) {
         //JDBCService jdbcService = new JDBCService();
         SQLqueries sqLqueries = new SQLqueries();
-        AddProjectLombok addProjectLombok = AddProjectLombok.builder().build();
+        AddProjectInfo addProjectInfo = AddProjectInfo.builder().build();
         jdbcService.connectionDB();
         try {
             ResultSet res = jdbcService.executeQuery(sqLqueries.ProjectInformationSelect(id));
             while (res.next()) {
-                addProjectLombok.setName(res.getString("name"));
-                addProjectLombok.setAnnouncement(res.getString("announcement"));
-                addProjectLombok.setShowAnnouncement(res.getBoolean("showAnnouncement"));
-                addProjectLombok.setProjectMode(res.getString("type"));
+                addProjectInfo.setName(res.getString("name"));
+                addProjectInfo.setAnnouncement(res.getString("announcement"));
+                addProjectInfo.setShowAnnouncement(res.getBoolean("showAnnouncement"));
+                addProjectInfo.setProjectMode(res.getString("type"));
             }
         } catch (SQLException throwables) {
             logger.error(throwables.getMessage());
         }
-        return addProjectLombok;
+        return addProjectInfo;
     }
 
-    public void createProject(AddProjectLombok addProjectLombok) {
+    public void createProject(AddProjectInfo addProjectInfo) {
         DashboardPage dashboardPage = new DashboardPage(browsersService);
         AddProjectPage addProjectPage = dashboardPage.addProjectButtonClick();
         ProjectPage projectPage = addProjectPage.moveToProject();
-        projectPage.setProjectName(addProjectLombok.getName());
-        switch (addProjectLombok.getProjectMode()) {
+        projectPage.setProjectName(addProjectInfo.getName());
+        switch (addProjectInfo.getProjectMode()) {
             case "Use a single repository for all cases (recommended)":
                 projectPage.setSuiteModeSingle();
                 break;
