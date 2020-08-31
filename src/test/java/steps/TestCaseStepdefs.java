@@ -3,9 +3,9 @@ package steps;
 import baseEntity.BaseUtil;
 import core.BrowsersService;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.TestCasesInfo;
-import models.UserInformation;
 import pages.DashboardPage;
 import pages.OverviewPage;
 import pages.testcasePages.AddTestCasePage;
@@ -22,10 +22,8 @@ public class TestCaseStepdefs extends BaseUtil {
     @When("go to add test case page")
     public void addProjectButtonClick() {
         DashboardPage dashboardPage = new DashboardPage(browsersService);
-        OverviewPage overviewPage=dashboardPage.projectLinkClick(browsersService.addProjectInfo.getName());
-        AddTestCasePage addTestCasePage=overviewPage.addTestCaseButtonClick();
-        addTestCasePage.template();
-
+        OverviewPage overviewPage = dashboardPage.projectLinkClick(browsersService.addProjectInfo.getName());
+        overviewPage.addTestCaseButtonClick();
     }
 
     @Given("testCase info from db where id = {int}")
@@ -44,5 +42,13 @@ public class TestCaseStepdefs extends BaseUtil {
         } catch (SQLException throwables) {
             logger.error(throwables.getMessage());
         }
+    }
+
+    @Then("create testcase onUI")
+    public void createTestcaseOnUI() {
+        AddTestCasePage addTestCasePage=new AddTestCasePage(browsersService,false);
+        addTestCasePage.setTitleOfCase(browsersService.testCasesInfo.getTitle());
+        addTestCasePage.setEstimateOfCase(browsersService.testCasesInfo.getEstimate());
+        addTestCasePage.addButtonClick();
     }
 }
