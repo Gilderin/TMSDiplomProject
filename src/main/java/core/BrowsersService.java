@@ -2,18 +2,21 @@ package core;
 
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import models.AddProjectLombok;
+import models.AddProjectInfo;
+import models.TestCasesInfo;
 import models.UserInformation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.testng.annotations.Test;
 import utils.Waiters;
 
 public class BrowsersService {
     public UserInformation userInformation;
-    public AddProjectLombok addProjectLombok;
+    public AddProjectInfo addProjectInfo;
+    public TestCasesInfo testCasesInfo;
     private WebDriver driver = null;
     private DriverManagerType driverManagerType = null;
     private Waiters waiters;

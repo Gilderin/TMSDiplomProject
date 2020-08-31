@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Builder
 
-public class AddProjectLombok {
+public class AddProjectInfo {
     private String name;
     private String announcement;
     private boolean showAnnouncement;
