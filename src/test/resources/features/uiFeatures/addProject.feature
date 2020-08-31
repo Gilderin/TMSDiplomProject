@@ -6,7 +6,7 @@ Feature: Add projects to account
     And login info from db where user id = 1
     And login to website
 
-  Scenario:
+  Scenario: Add Project
     Given project info from db where project id = 3
     When add project button click
     Then create project on UI
