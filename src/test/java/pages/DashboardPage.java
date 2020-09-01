@@ -13,7 +13,7 @@ public class DashboardPage extends BasePage {
     private By USERNAVIGATIONDROPDOWNSELECTOR = By.id("navigation-user");
     private By LOGOUTUSERBUTTONSELECTOR = By.id("navigation-user-logout");
     private By ADMINISTRATIONBUTTONSELECTOR = By.id("navigation-admin");
-    private String projectLink = "//table//a[text()='replace']";
+    private String projectLink = "//div[@class='summary-title text-ppp']//a[text()='replace']";
 
     public DashboardPage(BrowsersService browsersService) {
         super(browsersService, false);
