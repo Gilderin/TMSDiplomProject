@@ -49,6 +49,7 @@ public class ApiStepdefs extends BaseUtil {
                 .extract().jsonPath().get("id");
     }
 
+    @And("delete project")
     public void deleteProject() {
         String endpoint = "index.php?/api/v2/delete_project/{project_id}";
 
@@ -153,6 +154,19 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK)
                 .extract().jsonPath().get("id");
 
+    }
+
+    @And("delete case")
+    public void deleteTestCase() {
+        String endpoint = "index.php?/api/v2/delete_case/{case_id}";
+
+        given()
+                .pathParam("case_id", caseID)
+                .when()
+                .post(endpoint)
+                .then()
+                .log().body()
+                .statusCode(HttpStatus.SC_OK);
     }
 
 
