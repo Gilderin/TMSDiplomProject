@@ -10,3 +10,5 @@ Feature:
     And create new section
     And testCase info from db where id = 1
     And create testCase
+    And delete case
+    And delete project
