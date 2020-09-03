@@ -7,6 +7,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.UserInformation;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import pages.DashboardPage;
 import pages.LoginPage;
@@ -32,9 +34,28 @@ public class LoginStepdefs extends BaseUtil {
         browsersService.SetupBrowser();
     }
 
+    @When("open login page with Alert")
+    public void openLoginPageWithAlert() {
+        browsersService.getDriver().get(properties.getURL());
+        ((JavascriptExecutor) browsersService.getDriver()).executeScript("alert('It is an ALERT');");
+    }
+
+    @And("get text from Alert")
+    public void getTextFromAlert() {
+        Alert alert = browsersService.getDriver().switchTo().alert();
+        Assert.assertEquals(alert.getText(), "It is an ALERT");
+    }
+
+    @And("close the Alert")
+    public void acceptTheAlert() {
+        Alert alert = browsersService.getDriver().switchTo().alert();
+        alert.accept();
+    }
+
     @When("open login page")
     public void openLoginPage() {
         browsersService.getDriver().get(properties.getURL());
+
     }
 
     @Given("login info from db where user id = {int}")
