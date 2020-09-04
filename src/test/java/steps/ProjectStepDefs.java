@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Step;
 import models.AddProjectInfo;
 import org.testng.Assert;
 import pages.DashboardPage;
@@ -17,13 +18,12 @@ import pages.administration.AdministrationProjectsPage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static io.restassured.RestAssured.given;
-
 public class ProjectStepDefs extends BaseUtil {
     public ProjectStepDefs(BrowsersService browsersService) {
         super(browsersService);
     }
 
+    @Step("Get information about project from DB")
     @Given("project info from db where project id = {int}")
     public void getProjectInfoFromDB(Integer id) {
         browsersService.addProjectInfo = AddProjectInfo.builder().build();
@@ -42,13 +42,14 @@ public class ProjectStepDefs extends BaseUtil {
         }
     }
 
-
+    @Step("Add project button click on dashboard page")
     @When("add project button click")
     public void addProjectButtonClick() {
         DashboardPage dashboardPage = new DashboardPage(browsersService);
         dashboardPage.addProjectButtonClick();
     }
 
+    @Step("Create project on UI")
     @Then("create project on UI")
     public void createProjectOnUI() {
         AddProjectPage addProjectPage = new AddProjectPage(browsersService);
@@ -62,6 +63,7 @@ public class ProjectStepDefs extends BaseUtil {
         projectPage.addProjectButtonClick();
     }
 
+    @Step("Set project mode")
     public void setProjectMode() {
         ProjectPage projectPage = new ProjectPage(browsersService);
         switch (browsersService.addProjectInfo.getProjectMode()) {
@@ -77,21 +79,23 @@ public class ProjectStepDefs extends BaseUtil {
         }
     }
 
+    @Step("Open administration page")
     @And("adnimistration project page opened")
     public void adnimistrationProjectPageOpened() {
-        DashboardPage dashboardPage=new DashboardPage(browsersService);
-        AdministrationPage administrationPage=dashboardPage.administrationButtonClick();
-        AdministrationProjectsPage administrationProjectsPage=administrationPage.projectLinkClick();
+        DashboardPage dashboardPage = new DashboardPage(browsersService);
+        AdministrationPage administrationPage = dashboardPage.administrationButtonClick();
+        AdministrationProjectsPage administrationProjectsPage = administrationPage.projectLinkClick();
         Assert.assertTrue(administrationProjectsPage.isPageOpened());
     }
 
+    @Step("Deleting a project with given name")
     @When("delete project with name from db")
     public void deleteProjectWithNameFromDb() {
-        AdministrationProjectsPage administrationProjectsPage =new AdministrationProjectsPage(browsersService,false);
+        AdministrationProjectsPage administrationProjectsPage = new AdministrationProjectsPage(browsersService, false);
         administrationProjectsPage.deleteIconClick(browsersService.addProjectInfo.getName());
         administrationProjectsPage.confirmationYesCheckboxClick();
         administrationProjectsPage.confirmationOkButtonClik();
-        Assert.assertFalse(administrationProjectsPage.projectLinkIsVisible(browsersService.addProjectInfo.getName()),"Project not deleted");
+        Assert.assertFalse(administrationProjectsPage.projectLinkIsVisible(browsersService.addProjectInfo.getName()), "Project not deleted");
     }
 }
 

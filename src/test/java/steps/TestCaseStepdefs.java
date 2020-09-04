@@ -5,6 +5,7 @@ import core.BrowsersService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Step;
 import models.TestCasesInfo;
 import pages.DashboardPage;
 import pages.OverviewPage;
@@ -19,6 +20,7 @@ public class TestCaseStepdefs extends BaseUtil {
         super(browsersService);
     }
 
+    @Step("\"Add test case\" button click")
     @When("go to add test case page")
     public void addProjectButtonClick() {
         DashboardPage dashboardPage = new DashboardPage(browsersService);
@@ -26,6 +28,7 @@ public class TestCaseStepdefs extends BaseUtil {
         overviewPage.addTestCaseButtonClick();
     }
 
+    @Step("Get information about test case from DB")
     @Given("testCase info from db where id = {int}")
     public void getTestCasesInformation(Integer id) {
         browsersService.testCasesInfo = TestCasesInfo.builder().build();
@@ -44,9 +47,10 @@ public class TestCaseStepdefs extends BaseUtil {
         }
     }
 
+    @Step("Creating test case on UI")
     @Then("create testcase onUI")
     public void createTestcaseOnUI() {
-        AddTestCasePage addTestCasePage=new AddTestCasePage(browsersService,false);
+        AddTestCasePage addTestCasePage = new AddTestCasePage(browsersService, false);
         addTestCasePage.setTitleOfCase(browsersService.testCasesInfo.getTitle());
         addTestCasePage.setEstimateOfCase(browsersService.testCasesInfo.getEstimate());
         addTestCasePage.addButtonClick();

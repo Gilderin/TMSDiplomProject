@@ -3,6 +3,7 @@ package core;
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import models.AddProjectInfo;
+import models.ProjectInfo;
 import models.TestCasesInfo;
 import models.UserInformation;
 import org.openqa.selenium.WebDriver;
@@ -10,15 +11,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.Test;
 import utils.Waiters;
 
 public class BrowsersService {
-    public UserInformation userInformation;
     public AddProjectInfo addProjectInfo;
     public TestCasesInfo testCasesInfo;
+    public ProjectInfo projectInfo;
+    public UserInformation userInformation;
     private WebDriver driver = null;
-    private DriverManagerType driverManagerType = null;
     private Waiters waiters;
     private String baseUrl;
 
@@ -30,7 +30,7 @@ public class BrowsersService {
 
         switch (readProperties.getBrowserName().toLowerCase()) {
             case "chrome":
-                driverManagerType = DriverManagerType.CHROME;
+                DriverManagerType driverManagerType = DriverManagerType.CHROME;
                 WebDriverManager.getInstance(driverManagerType).setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.setHeadless(readProperties.isHeadless());

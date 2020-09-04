@@ -5,6 +5,7 @@ import baseEntity.BaseUtil;
 import core.BrowsersService;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
@@ -24,6 +25,7 @@ public class ApiStepdefs extends BaseUtil {
     int caseID;
     String name = "fdfd";
 
+    @Step("Connect to api with basic authentication")
     @When("use this information to login")
     public void setupAPI() {
         RestAssured.baseURI = properties.getURL();
@@ -32,6 +34,7 @@ public class ApiStepdefs extends BaseUtil {
                 .auth().preemptive().basic(browsersService.userInformation.getEmail(), browsersService.userInformation.getPassword());
     }
 
+    @Step("Create project")
     @When("create project")
     public void createProject() {
         String endpoint = "/index.php?/api/v2/add_project";
@@ -49,6 +52,7 @@ public class ApiStepdefs extends BaseUtil {
                 .extract().jsonPath().get("id");
     }
 
+    @Step("Delete project")
     @And("delete project")
     public void deleteProject() {
         String endpoint = "index.php?/api/v2/delete_project/{project_id}";
@@ -62,6 +66,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
+    @Step("Update project")
     public void updateProject() {
         String endpoint = "index.php?/api/v2/update_project/{project_id}";
 
@@ -81,6 +86,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
+    @Step("Get all projects")
     public void getAllProjects() {
         String endpoint = "/index.php?/api/v2/get_projects";
 
@@ -92,6 +98,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
+    @Step("Get all users")
     public void getAllUsers() {
         String endpoint = "/index.php?/api/v2/get_users";
 
@@ -102,6 +109,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
+    @Step("Get all cases")
     @And("get all testCases")
     public void getAllCases() {
         String endpoint = "index.php?/api/v2/get_cases/{project_id}";
@@ -115,6 +123,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
+    @Step("Create test case")
     @And("create testCase")
     public void createTestCase() {
         String endpoint = "index.php?/api/v2/add_case/{section_id}";
@@ -138,6 +147,7 @@ public class ApiStepdefs extends BaseUtil {
                 .extract().jsonPath().get("id");
     }
 
+    @Step("Create new section")
     @And("create new section")
     public void createSection() {
         String endpoint = "index.php?/api/v2/add_section/{project_id}";
@@ -156,6 +166,7 @@ public class ApiStepdefs extends BaseUtil {
 
     }
 
+    @Step("Delete test case")
     @And("delete case")
     public void deleteTestCase() {
         String endpoint = "index.php?/api/v2/delete_case/{case_id}";
@@ -168,6 +179,4 @@ public class ApiStepdefs extends BaseUtil {
                 .log().body()
                 .statusCode(HttpStatus.SC_OK);
     }
-
-
 }
