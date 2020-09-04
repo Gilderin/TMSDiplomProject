@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Waiters {
-    private WebDriverWait wait;
+    private final WebDriverWait wait;
 
     public Waiters(WebDriver driver, int timeOut) {
         wait = new WebDriverWait(driver, timeOut);

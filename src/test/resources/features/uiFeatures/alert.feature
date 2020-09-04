@@ -1,6 +1,6 @@
-Feature: Alert
+Feature: Working with alert
 
-  Scenario: Allert
+  Scenario: Check alert and close it
     Given  browser is open
     And  open login page with Alert
     And get text from Alert

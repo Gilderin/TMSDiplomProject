@@ -2,27 +2,19 @@ package utils;
 
 public class SQLqueries {
 
-    private String ProjectInformation = "";
-    private String LoginInformation = "";
-    private String TestCasesInformation = "";
-
     public String ProjectInformationSelect(Integer id) {
-        ProjectInformation ="Select pr.name, pt.type, pr.announcement, pr.show_announcement, pr.\"projectType\" from public.\"Projects\" as pr" +
+        return "Select pr.name, pt.type, pr.announcement, pr.show_announcement, pr.\"projectType\" from public.\"Projects\" as pr" +
                 " join public.\"ProjectsType\" pt on pr.\"projectType\"=pt.\"id\"" +
-                " where pr.\"id\"='"+id+"'";
-        return ProjectInformation;
+                " where pr.\"id\"='" + id + "'";
     }
 
     public String LoginInformationSelect(Integer id) {
-        LoginInformation = "Select * from public.\"Users\"" +
-                " where \"Users\".\"id\"='"+id+"'";
-        return LoginInformation;
+        return "Select * from public.\"Users\"" +
+                " where \"Users\".\"id\"='" + id + "'";
     }
 
     public String TestCasesInformationSelect(Integer id) {
-        TestCasesInformation = "Select title, template, priority, estimate, type from public.\"TestCases\"" +
-                " where id = '"+id+"'";
-        return TestCasesInformation;
+        return "Select title, template, priority, estimate, type from public.\"TestCases\"" +
+                " where id = '" + id + "'";
     }
-
 }

@@ -11,11 +11,6 @@ public class Hook extends BaseUtil {
         super(browsersService);
     }
 
-    @Before
-    public void initializeTest() {
-
-    }
-
     @After
     public void tearDown() {
         if (browsersService.getDriver() != null)

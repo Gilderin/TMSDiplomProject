@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-
 public class AddProjectInfo {
     private String name;
     private String announcement;
