@@ -77,6 +77,7 @@ public class LoginStepdefs extends BaseUtil {
                 browsersService.userInformation.setPassword(res.getString("password"));
                 browsersService.userInformation.setName_on_site(res.getString("name_on_site"));
             }
+            jdbcService.closeConnection();
         } catch (SQLException throwables) {
             logger.error(throwables.getMessage());
         }

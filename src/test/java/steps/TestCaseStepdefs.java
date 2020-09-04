@@ -42,6 +42,7 @@ public class TestCaseStepdefs extends BaseUtil {
                 browsersService.testCasesInfo.setTemplateId(res.getInt("template"));
                 browsersService.testCasesInfo.setTypeId(res.getInt("type"));
             }
+            jdbcService.closeConnection();
         } catch (SQLException throwables) {
             logger.error(throwables.getMessage());
         }
