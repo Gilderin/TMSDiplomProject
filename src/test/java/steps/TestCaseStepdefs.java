@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import models.TestCasesInfo;
+import org.openqa.selenium.By;
 import pages.DashboardPage;
 import pages.OverviewPage;
 import pages.testcasePages.AddTestCasePage;
@@ -15,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TestCaseStepdefs extends BaseUtil {
+    By fileInput = By.cssSelector("input[type=file]");
+    String filePath = "C:\\Users\\user\\Desktop\\ВОЛК.jpg";
 
     public TestCaseStepdefs(BrowsersService browsersService) {
         super(browsersService);
@@ -56,4 +59,15 @@ public class TestCaseStepdefs extends BaseUtil {
         addTestCasePage.setEstimateOfCase(browsersService.testCasesInfo.getEstimate());
         addTestCasePage.addButtonClick();
     }
+
+    @Step("Creating test case on UI with Upload")
+    @Then("create testcase onUI with Upload")
+    public void createTestcaseOnUIwithUpload() {
+        AddTestCasePage addTestCasePage = new AddTestCasePage(browsersService, false);
+        addTestCasePage.setTitleOfCase(browsersService.testCasesInfo.getTitle());
+        addTestCasePage.setEstimateOfCase(browsersService.testCasesInfo.getEstimate());
+        browsersService.getDriver().findElement(fileInput).sendKeys(filePath);
+        addTestCasePage.addButtonClick();
+    }
+
 }
