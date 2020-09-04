@@ -16,8 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TestCaseStepdefs extends BaseUtil {
-    By fileInput = By.cssSelector("input[type=file]");
-    String filePath = "C:\\Users\\user\\Desktop\\ВОЛК.jpg";
 
     public TestCaseStepdefs(BrowsersService browsersService) {
         super(browsersService);
@@ -66,7 +64,7 @@ public class TestCaseStepdefs extends BaseUtil {
         AddTestCasePage addTestCasePage = new AddTestCasePage(browsersService, false);
         addTestCasePage.setTitleOfCase(browsersService.testCasesInfo.getTitle());
         addTestCasePage.setEstimateOfCase(browsersService.testCasesInfo.getEstimate());
-        browsersService.getDriver().findElement(fileInput).sendKeys(filePath);
+        addTestCasePage.uploadFile();
         addTestCasePage.addButtonClick();
     }
 

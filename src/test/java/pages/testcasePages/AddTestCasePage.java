@@ -16,6 +16,8 @@ public class AddTestCasePage extends BasePage {
     private By ADDCASEBUTTONSELECTOR = By.id("accept");
     private By ADDANDNEXTBUTTONSELECTOR = By.id("accept_and_next");
     private By CANCELBUTTONSELECTOR = By.cssSelector(".button-cancel.case-form-cancel");
+    By fileInput = By.cssSelector("input[type=file]");
+    String filePath = "C:\\Users\\user\\Desktop\\ВОЛК.jpg";
 
     public AddTestCasePage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
@@ -54,5 +56,9 @@ public class AddTestCasePage extends BasePage {
     public void addButtonClick(){
         ((JavascriptExecutor) browsersService.getDriver()).executeScript("arguments[0].scrollIntoView(true);", browsersService.getDriver().findElement(ADDCASEBUTTONSELECTOR));
         browsersService.getWaiters().waitForVisibility(ADDCASEBUTTONSELECTOR).click();
+    }
+
+    public void uploadFile(){
+        browsersService.getDriver().findElement(fileInput).sendKeys(filePath);
     }
 }
