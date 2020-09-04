@@ -67,6 +67,7 @@ public class ApiStepdefs extends BaseUtil {
     }
 
     @Step("Update project")
+    @And("Update project")
     public void updateProject() {
         String endpoint = "index.php?/api/v2/update_project/{project_id}";
 
@@ -87,6 +88,7 @@ public class ApiStepdefs extends BaseUtil {
     }
 
     @Step("Get all projects")
+    @And("Get all projects")
     public void getAllProjects() {
         String endpoint = "/index.php?/api/v2/get_projects";
 
@@ -99,6 +101,7 @@ public class ApiStepdefs extends BaseUtil {
     }
 
     @Step("Get all users")
+    @And("Get all users")
     public void getAllUsers() {
         String endpoint = "/index.php?/api/v2/get_users";
 
