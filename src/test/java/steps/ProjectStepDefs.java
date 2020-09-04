@@ -37,6 +37,7 @@ public class ProjectStepDefs extends BaseUtil {
                 browsersService.addProjectInfo.setProjectModeId(res.getInt("projectType"));
                 browsersService.addProjectInfo.setProjectMode(res.getString("type"));
             }
+            jdbcService.closeConnection();
         } catch (SQLException throwables) {
             logger.error(throwables.getMessage());
         }
@@ -80,7 +81,7 @@ public class ProjectStepDefs extends BaseUtil {
     }
 
     @Step("Open administration page")
-    @And("adnimistration project page opened")
+    @And("administration project page opened")
     public void adnimistrationProjectPageOpened() {
         DashboardPage dashboardPage = new DashboardPage(browsersService);
         AdministrationPage administrationPage = dashboardPage.administrationButtonClick();

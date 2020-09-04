@@ -1,4 +1,4 @@
-Feature:
+Feature: Working with test-cases through API
 
   Background:
     Given login info from db where user id = 1

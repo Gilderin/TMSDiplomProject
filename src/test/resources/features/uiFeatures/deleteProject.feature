@@ -6,7 +6,7 @@ Feature: Delete projects from account
     And login info from db where user id = 1
     And login to website
 
-  Scenario: delete project
+  Scenario: Delete project
     Given project info from db where project id = 3
-    And adnimistration project page opened
+    And administration project page opened
     When delete project with name from db

@@ -1,21 +1,23 @@
 package services;
 
-import baseEntity.BaseTest;
 import core.ReadProperties;
+import org.testng.log4testng.Logger;
 
 import java.sql.*;
 
-public class JDBCService extends BaseTest {
+public class JDBCService {
     private static Connection connection = null;
     private static Statement statement = null;
+    public static Logger logger = Logger.getLogger(JDBCService.class);
+    public ReadProperties properties;
 
     public JDBCService() {
-        properties=new ReadProperties();
+        properties = new ReadProperties();
     }
 
-    public  void connectionDB(){
+    public void connectionDB() {
         logger.info("Setup JDBC connector");
-        String db_URL = properties.getDB()+"://" + properties.getDBHost() + ":" + properties.getDBPort() + "/" + properties.getDBName();
+        String db_URL = properties.getDB() + "://" + properties.getDBHost() + ":" + properties.getDBPort() + "/" + properties.getDBName();
         try {
             Class.forName("org.postgresql.Driver");
             logger.info("Class has been found");
