@@ -19,6 +19,7 @@ public class AddTestCasePage extends BasePage {
     private By ADDANDNEXTBUTTONSELECTOR = By.id("accept_and_next");
     private By CANCELBUTTONSELECTOR = By.cssSelector(".button-cancel.case-form-cancel");
     private By FILEINPUTSELECTOR = By.cssSelector("input[type=file]");
+    private By ERRORMESSAGESELECTOR = By.xpath("//*[@id='content-inner']/div[@class='message message-error']");
     private String basePath = new File("").getAbsolutePath();
     private String filePath = basePath+"\\src\\pictures\\picture.png";
 
