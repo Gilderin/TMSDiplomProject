@@ -7,7 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import models.TestCasesInfo;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import pages.DashboardPage;
 import pages.OverviewPage;
@@ -40,6 +39,11 @@ public class TestCaseStepdefs extends BaseUtil {
             ResultSet res = jdbcService.executeQuery(sqLqueries.TestCasesInformationSelect(id));
             while (res.next()) {
                 browsersService.testCasesInfo.setTitle(res.getString("title"));
+                if (browsersService.testCasesInfo.getTitle()==null) {
+                    browsersService.testCasesInfo.setTitle("");
+                } else {
+                    browsersService.testCasesInfo.setTitle(res.getString("title"));
+                }
                 browsersService.testCasesInfo.setEstimate(res.getString("estimate"));
                 browsersService.testCasesInfo.setPriorityId(res.getInt("priority"));
                 browsersService.testCasesInfo.setTemplateId(res.getInt("template"));
@@ -70,16 +74,31 @@ public class TestCaseStepdefs extends BaseUtil {
         addTestCasePage.addButtonClick();
     }
 
-    @Step("Creating test case with maximum value")
-    @Then("create testcase onUI with maximum value")
-    public void createTestcaseOnUIWithMaximumValue() {
-        AddTestCasePage addTestCasePage = new AddTestCasePage(browsersService, false);
+    @Step("test case name length is greater than maximum")
+    @Then("test case name length is greater than maximum")
+    public void testcaseTitleWithOverMaximumValue() {
         TestCasePage testCasePage = new TestCasePage(browsersService, false);
-        addTestCasePage.setTitleOfCase(browsersService.testCasesInfo.getTitle());
-        addTestCasePage.setEstimateOfCase(browsersService.testCasesInfo.getEstimate());
-        addTestCasePage.addButtonClick();
+        Assert.assertNotEquals(testCasePage.getNameOfCase().length(), 251);
+    }
+
+    @Step("test case name length is maximum")
+    @Then("test case name length is maximum")
+    public void testcaseTitleWithMaximumValue() {
+        TestCasePage testCasePage = new TestCasePage(browsersService, false);
         Assert.assertEquals(testCasePage.getNameOfCase().length(), 250);
     }
 
+    @Step("test case name length is minimum")
+    @Then("test case name length is minimum")
+    public void testcaseTitleWithMinimumValue() {
+        TestCasePage testCasePage = new TestCasePage(browsersService, false);
+        Assert.assertEquals(testCasePage.getNameOfCase().length(), 1);
+    }
 
+    @Step("test case not created with error")
+    @Then("test case not created with error")
+    public void testcaseTitleWithoutValue() {
+        AddTestCasePage addTestCasePage = new AddTestCasePage(browsersService, false);
+        Assert.assertEquals(addTestCasePage.getError(), "Field Title is a required field.");
+    }
 }

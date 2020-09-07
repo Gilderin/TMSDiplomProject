@@ -10,5 +10,6 @@ Feature: Working with test-cases through API
   Scenario: Тест создания Тест Кейса с помощью API
     Given create new section
     When create testCase
+    Then get testCase
     And delete case
     And delete project
