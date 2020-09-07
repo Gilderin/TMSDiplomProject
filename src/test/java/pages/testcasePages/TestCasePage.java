@@ -20,7 +20,7 @@ public class TestCasePage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return browsersService.getWaiters().waitForVisibility(TITLEOFCASESELECTOR).isDisplayed();
+        return browsersService.getWaiters().waitForVisibility(By.cssSelector(".content-header-title.page_title")).isDisplayed();
     }
 
     public boolean attachmentIsDisplayed(){
@@ -31,7 +31,7 @@ public class TestCasePage extends BasePage {
         }
     }
 
-    public String nameOfCase(){
+    public String getNameOfCase(){
         return  browsersService.getWaiters().waitForVisibility(TITLEOFCASESELECTOR).getText();
     }
 }

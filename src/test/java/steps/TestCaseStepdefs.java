@@ -8,9 +8,11 @@ import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import models.TestCasesInfo;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import pages.DashboardPage;
 import pages.OverviewPage;
 import pages.testcasePages.AddTestCasePage;
+import pages.testcasePages.TestCasePage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,5 +69,17 @@ public class TestCaseStepdefs extends BaseUtil {
         addTestCasePage.uploadFile();
         addTestCasePage.addButtonClick();
     }
+
+    @Step("Creating test case with maximum value")
+    @Then("create testcase onUI with maximum value")
+    public void createTestcaseOnUIWithMaximumValue() {
+        AddTestCasePage addTestCasePage = new AddTestCasePage(browsersService, false);
+        TestCasePage testCasePage = new TestCasePage(browsersService, false);
+        addTestCasePage.setTitleOfCase(browsersService.testCasesInfo.getTitle());
+        addTestCasePage.setEstimateOfCase(browsersService.testCasesInfo.getEstimate());
+        addTestCasePage.addButtonClick();
+        Assert.assertEquals(testCasePage.getNameOfCase().length(), 250);
+    }
+
 
 }
