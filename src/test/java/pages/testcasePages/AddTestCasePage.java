@@ -5,6 +5,8 @@ import core.BrowsersService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
+import java.io.File;
+
 public class AddTestCasePage extends BasePage {
     private By TITLECASEFIELD = By.id("title");
     private By SECTIONSELECTOR = By.id("section_id");
@@ -16,8 +18,9 @@ public class AddTestCasePage extends BasePage {
     private By ADDCASEBUTTONSELECTOR = By.id("accept");
     private By ADDANDNEXTBUTTONSELECTOR = By.id("accept_and_next");
     private By CANCELBUTTONSELECTOR = By.cssSelector(".button-cancel.case-form-cancel");
-    By fileInput = By.cssSelector("input[type=file]");
-    String filePath = "C:\\Users\\user\\Desktop\\ВОЛК.jpg";
+    private By FILEINPUTSELECTOR = By.cssSelector("input[type=file]");
+    private String basePath = new File("").getAbsolutePath();
+    private String filePath = basePath+"\\src\\pictures\\picture.png";
 
     public AddTestCasePage(BrowsersService browsersService, boolean openPageByUrl) {
         super(browsersService, openPageByUrl);
@@ -59,6 +62,6 @@ public class AddTestCasePage extends BasePage {
     }
 
     public void uploadFile(){
-        browsersService.getDriver().findElement(fileInput).sendKeys(filePath);
+        browsersService.getDriver().findElement(FILEINPUTSELECTOR).sendKeys(filePath);
     }
 }
