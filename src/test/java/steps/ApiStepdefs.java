@@ -38,7 +38,6 @@ public class ApiStepdefs extends BaseUtil {
     @When("create project")
     public void createProject() {
         String endpoint = "/index.php?/api/v2/add_project";
-
         projectID = given()
                 .body(String.format("{\n" +
                         "    \"name\": \"%s\",\n" +
@@ -56,7 +55,6 @@ public class ApiStepdefs extends BaseUtil {
     @And("delete project")
     public void deleteProject() {
         String endpoint = "index.php?/api/v2/delete_project/{project_id}";
-
         given()
                 .pathParam("project_id", projectID)
                 .when()
@@ -70,13 +68,11 @@ public class ApiStepdefs extends BaseUtil {
     @And("Update project")
     public void updateProject() {
         String endpoint = "index.php?/api/v2/update_project/{project_id}";
-
         AddProjectInfo project = AddProjectInfo.builder().build();
         project.setName("PR04_UPD");
         project.setAnnouncement("Test!!!");
         project.setShowAnnouncement(true);
         project.setCompleted(true);
-
         given()
                 .pathParam("project_id", projectID)
                 .body(project, ObjectMapperType.GSON)
@@ -91,9 +87,21 @@ public class ApiStepdefs extends BaseUtil {
     @And("Get all projects")
     public void getAllProjects() {
         String endpoint = "/index.php?/api/v2/get_projects";
-
         given()
                 .when()
+                .get(endpoint)
+                .then()
+                .log().body()
+                .statusCode(HttpStatus.SC_OK);
+    }
+
+    @Step("Get project")
+    @And("Get project")
+    public void getProject() {
+        String endpoint = "index.php?/api/v2/get_project/{project_id}";
+        given()
+                .when()
+                .pathParam("project_id", projectID)
                 .get(endpoint)
                 .then()
                 .log().body()
@@ -104,7 +112,6 @@ public class ApiStepdefs extends BaseUtil {
     @And("Get all users")
     public void getAllUsers() {
         String endpoint = "/index.php?/api/v2/get_users";
-
         given()
                 .when()
                 .get(endpoint)
@@ -116,11 +123,21 @@ public class ApiStepdefs extends BaseUtil {
     @And("get all testCases")
     public void getAllCases() {
         String endpoint = "index.php?/api/v2/get_cases/{project_id}";
-
-
         given()
                 .when()
                 .pathParam("project_id", projectID)
+                .get(endpoint)
+                .then().log().body()
+                .statusCode(HttpStatus.SC_OK);
+    }
+
+    @Step("Get case")
+    @And("get testCase")
+    public void getTestCase() {
+        String endpoint = "index.php?/api/v2/get_case/{case_id}";
+        given()
+                .when()
+                .pathParam("case_id", caseID)
                 .get(endpoint)
                 .then().log().body()
                 .statusCode(HttpStatus.SC_OK);

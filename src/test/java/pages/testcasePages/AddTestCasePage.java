@@ -65,4 +65,8 @@ public class AddTestCasePage extends BasePage {
     public void uploadFile(){
         browsersService.getDriver().findElement(FILEINPUTSELECTOR).sendKeys(filePath);
     }
+
+    public String getError(){
+        return browsersService.getWaiters().waitForVisibility(ERRORMESSAGESELECTOR).getText();
+    }
 }
