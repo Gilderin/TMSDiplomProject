@@ -72,6 +72,8 @@ public class TestCaseStepdefs extends BaseUtil {
         addTestCasePage.setEstimateOfCase(browsersService.testCasesInfo.getEstimate());
         addTestCasePage.uploadFile();
         addTestCasePage.addButtonClick();
+        TestCasePage testCasePage=new TestCasePage(browsersService,false);
+        Assert.assertTrue(testCasePage.attachmentIsDisplayed());
     }
 
     @Step("test case name length is greater than maximum")
@@ -96,9 +98,9 @@ public class TestCaseStepdefs extends BaseUtil {
     }
 
     @Step("test case not created with error")
-    @Then("test case not created with error")
-    public void testcaseTitleWithoutValue() {
+    @Then("test case not created with error {string}")
+    public void testcaseTitleWithoutValue(String errorMessage) {
         AddTestCasePage addTestCasePage = new AddTestCasePage(browsersService, false);
-        Assert.assertEquals(addTestCasePage.getError(), "Field Title is a required field.");
+        Assert.assertEquals(addTestCasePage.getError(), errorMessage);
     }
 }

@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import models.AddProjectInfo;
+import models.ProjectInfo;
 import org.testng.Assert;
 import pages.DashboardPage;
 import pages.addProjectPages.AddProjectPage;
