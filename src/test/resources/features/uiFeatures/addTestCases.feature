@@ -17,13 +17,11 @@ Feature: Add projects to account
     When go to add test case page
     Then create testcase onUI with Upload
 
-
   Scenario: Over maximum value test
     Given testCase info from db where id = 4
     When go to add test case page
     Then create testcase onUI
     And test case name length is greater than maximum
-
 
   Scenario: Maximum value test
     Given testCase info from db where id = 5
@@ -41,4 +39,4 @@ Feature: Add projects to account
     Given testCase info from db where id = 7
     When go to add test case page
     Then create testcase onUI
-    And test case not created with error
+    And test case not created with error "Field Title is a required field."

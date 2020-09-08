@@ -25,7 +25,7 @@ public class ApiStepdefs extends BaseUtil {
     int caseID;
     String name = "fdfd";
 
-    @Step("Connect to api with basic authentication")
+    @Step("connect to api with basic authentication")
     @When("use this information to login")
     public void setupAPI() {
         RestAssured.baseURI = properties.getURL();
@@ -34,7 +34,7 @@ public class ApiStepdefs extends BaseUtil {
                 .auth().preemptive().basic(browsersService.userInformation.getEmail(), browsersService.userInformation.getPassword());
     }
 
-    @Step("Create project")
+    @Step("create project")
     @When("create project")
     public void createProject() {
         String endpoint = "/index.php?/api/v2/add_project";
@@ -51,7 +51,7 @@ public class ApiStepdefs extends BaseUtil {
                 .extract().jsonPath().get("id");
     }
 
-    @Step("Delete project")
+    @Step("delete project")
     @And("delete project")
     public void deleteProject() {
         String endpoint = "index.php?/api/v2/delete_project/{project_id}";
@@ -64,8 +64,8 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    @Step("Update project")
-    @And("Update project")
+    @Step("update project")
+    @And("update project")
     public void updateProject() {
         String endpoint = "index.php?/api/v2/update_project/{project_id}";
         AddProjectInfo project = AddProjectInfo.builder().build();
@@ -83,8 +83,8 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    @Step("Get all projects")
-    @And("Get all projects")
+    @Step("get all projects")
+    @And("get all projects")
     public void getAllProjects() {
         String endpoint = "/index.php?/api/v2/get_projects";
         given()
@@ -95,8 +95,8 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    @Step("Get project")
-    @And("Get project")
+    @Step("get project")
+    @And("get project")
     public void getProject() {
         String endpoint = "index.php?/api/v2/get_project/{project_id}";
         given()
@@ -108,8 +108,8 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    @Step("Get all users")
-    @And("Get all users")
+    @Step("get all users")
+    @And("get all users")
     public void getAllUsers() {
         String endpoint = "/index.php?/api/v2/get_users";
         given()
@@ -119,7 +119,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    @Step("Get all cases")
+    @Step("get all cases")
     @And("get all testCases")
     public void getAllCases() {
         String endpoint = "index.php?/api/v2/get_cases/{project_id}";
@@ -131,7 +131,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    @Step("Get case")
+    @Step("get case")
     @And("get testCase")
     public void getTestCase() {
         String endpoint = "index.php?/api/v2/get_case/{case_id}";
@@ -143,7 +143,7 @@ public class ApiStepdefs extends BaseUtil {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    @Step("Create test case")
+    @Step("create test case")
     @And("create testCase")
     public void createTestCase() {
         String endpoint = "index.php?/api/v2/add_case/{section_id}";
@@ -167,7 +167,7 @@ public class ApiStepdefs extends BaseUtil {
                 .extract().jsonPath().get("id");
     }
 
-    @Step("Create new section")
+    @Step("create new section")
     @And("create new section")
     public void createSection() {
         String endpoint = "index.php?/api/v2/add_section/{project_id}";
@@ -186,11 +186,10 @@ public class ApiStepdefs extends BaseUtil {
 
     }
 
-    @Step("Delete test case")
+    @Step("delete test case")
     @And("delete case")
     public void deleteTestCase() {
         String endpoint = "index.php?/api/v2/delete_case/{case_id}";
-
         given()
                 .pathParam("case_id", caseID)
                 .when()

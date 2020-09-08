@@ -6,10 +6,10 @@ Feature: Working with test-cases through API
     And testCase info from db where id = 1
     And project info from db where project id = 4
     And create project
+    And create new section
 
-  Scenario: Тест создания Тест Кейса с помощью API
-    Given create new section
-    When create testCase
-    Then get testCase
-    And delete case
+  Scenario: Create test case through API
+    Given create testCase
+    When get testCase
+    Then delete case
     And delete project
