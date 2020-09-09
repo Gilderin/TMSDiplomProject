@@ -11,5 +11,5 @@ Feature: Working with test-cases through API
   Scenario: Create test case through API
     Given create testCase
     When get testCase
-    Then delete case
-    And delete project
+    And delete case
+    Then  delete project

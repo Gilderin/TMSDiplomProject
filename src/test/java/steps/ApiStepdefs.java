@@ -186,6 +186,11 @@ public class ApiStepdefs extends BaseUtil {
 
     }
 
+    @Step("API is start")
+    @And("API is start")
+    public void apiStarted() {
+    }
+
     @Step("delete test case")
     @And("delete case")
     public void deleteTestCase() {
