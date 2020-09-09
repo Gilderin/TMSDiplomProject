@@ -16,11 +16,12 @@ public class JDBCService {
     }
 
     public void connectionDB() {
-        logger.info("Setup JDBC connector");
+
+        logger.error("Setup JDBC connector");
         String db_URL = properties.getDB() + "://" + properties.getDBHost() + ":" + properties.getDBPort() + "/" + properties.getDBName();
         try {
             Class.forName("org.postgresql.Driver");
-            logger.info("Class has been found");
+            logger.trace("Class has been found");
             connection = DriverManager.getConnection(db_URL, properties.getDBUsername(), properties.getDBPassword());
             logger.info("Connection has been established");
             logger.info("Setup statement");

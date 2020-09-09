@@ -8,5 +8,5 @@ Feature: Delete projects from account
 
   Scenario: Delete project
     Given project info from db where project id = 3
-    And administration project page opened
-    When delete project with name from db
+    When administration project page opened
+    Then delete project with name from db

@@ -7,5 +7,5 @@ Feature: Working with project through API
   Scenario: Create project with API
     Given project info from db where project id = 4
     When create project
-    Then get project
-    And delete project
+    And get project
+    Then delete project
